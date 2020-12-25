@@ -5,6 +5,7 @@
  */
 package Register;
 
+import Log.Login;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -51,6 +52,7 @@ public class Register extends javax.swing.JFrame {
         cpsw = new javax.swing.JPasswordField();
         psw = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,12 +60,15 @@ public class Register extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usr.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        usr.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanel1.add(usr, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 230, 40));
 
         email.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        email.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 240, 230, 40));
 
         fname.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        fname.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnameActionPerformed(evt);
@@ -74,6 +79,7 @@ public class Register extends javax.swing.JFrame {
         gen.setBackground(new java.awt.Color(255, 230, 208));
         gen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINE", "FEMININE", "NEUTER", " " }));
         gen.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        gen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 230, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -104,6 +110,7 @@ public class Register extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton1.setText("REGISTER");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -114,9 +121,11 @@ public class Register extends javax.swing.JFrame {
         jButton1.getAccessibleContext().setAccessibleDescription("");
 
         cpsw.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        cpsw.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanel1.add(cpsw, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 230, 40));
 
         psw.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        psw.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         psw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pswActionPerformed(evt);
@@ -125,8 +134,20 @@ public class Register extends javax.swing.JFrame {
         jPanel1.add(psw, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 230, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\REGISTER.jpg")); // NOI18N
+        jLabel2.setOpaque(true);
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 550));
         jLabel2.getAccessibleContext().setAccessibleName("REGISTER");
+
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setForeground(null);
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        back.setOpaque(false);
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 40, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -150,7 +171,7 @@ public class Register extends javax.swing.JFrame {
 					pst.executeUpdate();
 					JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
 				}catch(HeadlessException | SQLException ex) {
-					JOptionPane.showMessageDialog(null,ex);
+					JOptionPane.showMessageDialog(null,"Eror");
 				}   
         
         
@@ -160,6 +181,12 @@ public class Register extends javax.swing.JFrame {
     private void pswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pswActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        dispose();
+        Login lg= new Login();
+        lg.setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +224,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JPasswordField cpsw;
     private javax.swing.JTextField email;
     private javax.swing.JTextField fname;

@@ -1,5 +1,7 @@
+package Log;
 
-import FIRSTPAGE.Page1;
+
+import FIRSTPAGE.HOME;
 import Register.Register;
 import password.ForgotPassword;
 import java.awt.Color;
@@ -51,11 +53,10 @@ public class Login extends javax.swing.JFrame {
         fpas = new javax.swing.JLabel();
         luser = new javax.swing.JTextField();
         lpass = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        remember = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(205, 92, 92));
@@ -130,13 +131,13 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(lpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 300, 30));
         lpass.getAccessibleContext().setAccessibleName("password");
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 230, 208));
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        remember.setBackground(new java.awt.Color(255, 230, 208));
+        remember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                rememberActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 30, 30));
+        jPanel1.add(remember, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 30, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\log bunaur.jpg")); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -10, 1110, 680));
@@ -161,9 +162,9 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_fpasMouseClicked
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    private void rememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberActionPerformed
+        
+    }//GEN-LAST:event_rememberActionPerformed
 
     private void blog1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blog1ActionPerformed
         
@@ -174,10 +175,11 @@ public class Login extends javax.swing.JFrame {
 					pst.setString(1, luser.getText());
 					pst.setString(2, lpass.getText());
 					rs = pst.executeQuery();
-					if (rs.next()) {
-							dispose();
-							String msg = luser.getText();
-							Page1 p=new Page1();
+					if (rs.next()) {			
+							String fullname = rs.getString("fullname");
+                                                        dispose();
+                                                        HOME.nmm=fullname;
+							HOME p=new HOME();
                                                         p.setVisible(true);
 						
 						 
@@ -246,7 +248,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton blog1;
     private javax.swing.JButton breg;
     private javax.swing.JLabel fpas;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -254,6 +255,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField lpass;
     private javax.swing.JTextField luser;
+    private javax.swing.JCheckBox remember;
     // End of variables declaration//GEN-END:variables
 
     private static class RunnableImpl implements Runnable {

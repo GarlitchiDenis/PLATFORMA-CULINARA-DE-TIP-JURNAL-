@@ -54,6 +54,7 @@ public NewPassword(String vemail){
         respsw = new javax.swing.JPasswordField();
         crespsw = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,6 +89,16 @@ public NewPassword(String vemail){
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\newpass.jpg")); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 460));
 
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        back.setOpaque(false);
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 30, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 460));
 
         pack();
@@ -114,6 +125,12 @@ public NewPassword(String vemail){
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        dispose();
+        ForgotPassword fp= new ForgotPassword();
+        fp.setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,6 +162,7 @@ public NewPassword(String vemail){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JPasswordField crespsw;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
