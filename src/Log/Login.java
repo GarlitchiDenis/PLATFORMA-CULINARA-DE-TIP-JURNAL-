@@ -101,11 +101,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(blog1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 170, 50));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\LICENTA\\iconite\\user (1).png")); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 40, 50));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\LICENTA\\iconite\\padlock (3).png")); // NOI18N
         jLabel2.setToolTipText("");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 40, 60));
 

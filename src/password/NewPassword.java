@@ -81,13 +81,20 @@ public NewPassword(String vemail){
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 140, 50));
 
         respsw.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.add(respsw, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 380, 40));
+        respsw.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        respsw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                respswActionPerformed(evt);
+            }
+        });
+        jPanel1.add(respsw, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 380, 40));
 
         crespsw.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        crespsw.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanel1.add(crespsw, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 380, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\newpass.jpg")); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 460));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 460));
 
         back.setBackground(new java.awt.Color(255, 255, 255));
         back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -99,7 +106,7 @@ public NewPassword(String vemail){
         });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 30, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 460));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,6 +138,10 @@ public NewPassword(String vemail){
         ForgotPassword fp= new ForgotPassword();
         fp.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
+
+    private void respswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respswActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_respswActionPerformed
 
     /**
      * @param args the command line arguments

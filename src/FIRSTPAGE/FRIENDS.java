@@ -5,6 +5,7 @@
  */
 package FIRSTPAGE;
 
+import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,17 +15,17 @@ import java.sql.ResultSet;
  *
  * @author garli
  */
-public class HOME extends javax.swing.JFrame {
+public class FRIENDS  extends javax.swing.JFrame {
 
     private int count=0;
     static Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    public static String nmm;
+   
     /**
      * Creates new form Page1
      */
-    public HOME() {
+    public FRIENDS() {
         initComponents();
         flname.setText(nmm);
         
@@ -58,8 +59,8 @@ public class HOME extends javax.swing.JFrame {
         menu.setBackground(new java.awt.Color(204, 255, 204));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("MERGE");
-        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 90, 50));
+        jLabel1.setText("prieten");
+        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 90, 50));
 
         jLabel2.setBackground(new java.awt.Color(255, 230, 208));
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
@@ -104,6 +105,11 @@ public class HOME extends javax.swing.JFrame {
                 opmenMouseClicked(evt);
             }
         });
+        opmen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opmenActionPerformed(evt);
+            }
+        });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
@@ -129,10 +135,12 @@ public class HOME extends javax.swing.JFrame {
         lg.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void opmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opmenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opmenActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-        FRIENDS p=new FRIENDS();
-        p.setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -5,6 +5,7 @@
  */
 package FIRSTPAGE;
 
+import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,17 +15,17 @@ import java.sql.ResultSet;
  *
  * @author garli
  */
-public class HOME extends javax.swing.JFrame {
+public class MyRecipes  extends javax.swing.JFrame {
 
     private int count=0;
     static Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    public static String nmm;
+   
     /**
      * Creates new form Page1
      */
-    public HOME() {
+    public MyRecipes() {
         initComponents();
         flname.setText(nmm);
         
@@ -48,6 +49,7 @@ public class HOME extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         opmen = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,8 +60,8 @@ public class HOME extends javax.swing.JFrame {
         menu.setBackground(new java.awt.Color(204, 255, 204));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("MERGE");
-        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 90, 50));
+        jLabel1.setText("retete");
+        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 90, 50));
 
         jLabel2.setBackground(new java.awt.Color(255, 230, 208));
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
@@ -104,7 +106,20 @@ public class HOME extends javax.swing.JFrame {
                 opmenMouseClicked(evt);
             }
         });
+        opmen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opmenActionPerformed(evt);
+            }
+        });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
+
+        jButton4.setText("CREATE");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
@@ -129,6 +144,10 @@ public class HOME extends javax.swing.JFrame {
         lg.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void opmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opmenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opmenActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
         FRIENDS p=new FRIENDS();
@@ -136,10 +155,14 @@ public class HOME extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
-        MyRecipes p=new MyRecipes();
-        p.setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+      dispose();
+      CreateRec c= new CreateRec();
+      c.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +205,7 @@ public class HOME extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
