@@ -21,12 +21,14 @@ public class HOME extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     public static String nmm;
+    
     /**
      * Creates new form Page1
      */
     public HOME() {
         initComponents();
         flname.setText(nmm);
+        
         
     }
 

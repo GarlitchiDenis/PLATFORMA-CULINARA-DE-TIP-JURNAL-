@@ -139,7 +139,6 @@ public class Register extends javax.swing.JFrame {
         jLabel2.getAccessibleContext().setAccessibleName("REGISTER");
 
         back.setBackground(new java.awt.Color(255, 255, 255));
-        back.setForeground(null);
         back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.setOpaque(false);
         back.addActionListener(new java.awt.event.ActionListener() {
