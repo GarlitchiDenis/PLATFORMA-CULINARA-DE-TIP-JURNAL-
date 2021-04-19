@@ -5,11 +5,16 @@
  */
 package FIRSTPAGE;
 
+import static FIRSTPAGE.CreateRec.connection;
 import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
+import java.awt.HeadlessException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +26,7 @@ public class MyRecipes  extends javax.swing.JFrame {
     static Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    PreparedStatement ps = null;
    
     /**
      * Creates new form Page1
@@ -28,6 +34,7 @@ public class MyRecipes  extends javax.swing.JFrame {
     public MyRecipes() {
         initComponents();
         flname.setText(nmm);
+        
         
     }
 
@@ -50,6 +57,9 @@ public class MyRecipes  extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         opmen = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        lb = new javax.swing.JLabel();
+        aa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,6 +131,20 @@ public class MyRecipes  extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, -1, -1));
 
+        jButton5.setText("Ver");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, -1, -1));
+
+        lb.setText("jLabel3");
+        jPanel1.add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 160, 70));
+
+        aa.setText("jTextField1");
+        jPanel1.add(aa, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
@@ -164,6 +188,26 @@ public class MyRecipes  extends javax.swing.JFrame {
       c.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         String sql="SELECT id FROM licenta.login  WHERE fullname ='"+nmm+"'";
+        try { 				
+            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+            ps =connection.prepareStatement(sql);
+            rs = ps.executeQuery();   
+          
+        //  if(rs.next()){
+               //String adid=rs.getString("id");
+              
+         // }
+        
+        
+        
+        } catch(HeadlessException | SQLException ex) {
+					JOptionPane.showMessageDialog(null,"Eror");
+        }
+         
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,14 +245,17 @@ public class MyRecipes  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField aa;
     private javax.swing.JLabel flname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lb;
     private javax.swing.JPanel menu;
     private javax.swing.JButton opmen;
     // End of variables declaration//GEN-END:variables

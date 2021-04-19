@@ -11,6 +11,7 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -23,6 +24,9 @@ public class CreateRec  extends javax.swing.JFrame {
     private int count=0;
     static Connection connection = null;
     PreparedStatement pst = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+  
     
    
     /**
@@ -262,16 +266,39 @@ public class CreateRec  extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         try {
-					String sqlt="INSERT INTO `licenta`.`recipes` (`name`, `ingredients`, `preparation_mode`, `type`,`dairy_products`,`meat`,`egg`,`fruit`,`vegetables`,`cereals`) VALUES (?,?,?,?,?,?,?,?,?,?);";
-                                        //String sqlt="INSERT INTO `licenta`.`recipes` (`name`, `ingredients`, `preparation_mode`, `type`,`dairy_products`,`meat`,`egg`) VALUES (?,?,?,?,?,?,?);";
+        
+       /* try { 				
+            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+            
+               
+          
+             
+        
+        
+        
+       }catch(HeadlessException | SQLException ex) {
+					JOptionPane.showMessageDialog(null,"Eror");
+        } 
+        
+        */
+        try {
+                
+            
+                                        String query="SELECT id FROM licenta.login  WHERE fullname ='"+nmm+"'";
+					String sqlt="INSERT INTO `licenta`.`recipes` (`name`, `ingredients`, `preparation_mode`, `type`,`dairy_products`,`meat`,`egg`,`fruit`,`vegetables`,`cereals`,`id`) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
                                         connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
-					pst =connection.prepareStatement(sqlt);
+					ps =connection.prepareStatement(query);
+                                        rs = ps.executeQuery();
+                                        String adid=null;  
+                                        if(rs.next()){
+                                                 adid=rs.getString("id");}
+                                        pst =connection.prepareStatement(sqlt);
 					pst.setString(1,nre.getText());
 					pst.setString(2,inre.getText());
 					pst.setString(3,mpre.getText());
 					pst.setString(4,tip.getSelectedItem().toString());
-					
+                                        
+                                        
                                         
                                         int l;
                                         int cr;
@@ -314,10 +341,10 @@ public class CreateRec  extends javax.swing.JFrame {
                                         }else{
                                             ce=0;}
                                        pst.setString(10, String.valueOf(ce));
+                                        
+                                      pst.setString(11,adid);
+                                       pst.executeUpdate();
                                        
-                                      
-				
-                                        pst.executeUpdate();
 					JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
 				}catch(HeadlessException | SQLException ex) {
 					JOptionPane.showMessageDialog(null,"Eror");
