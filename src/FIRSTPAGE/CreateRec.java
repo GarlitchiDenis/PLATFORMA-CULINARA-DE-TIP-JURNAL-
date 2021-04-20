@@ -8,11 +8,19 @@ package FIRSTPAGE;
 import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
 import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +34,7 @@ public class CreateRec  extends javax.swing.JFrame {
     PreparedStatement pst = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    static String ImagePath=null;
   
     
    
@@ -77,6 +86,8 @@ public class CreateRec  extends javax.swing.JFrame {
         car = new javax.swing.JCheckBox();
         inre = new java.awt.TextArea();
         mpre = new java.awt.TextArea();
+        lbi = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -169,7 +180,7 @@ public class CreateRec  extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 480, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
 
         jLabel3.setText("NUME");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, 20));
@@ -226,6 +237,17 @@ public class CreateRec  extends javax.swing.JFrame {
         jPanel1.add(inre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 230, 60));
         jPanel1.add(mpre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 230, 70));
 
+        lbi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(lbi, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 240, 310));
+
+        jButton5.setText("UPLOAD");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
@@ -267,25 +289,12 @@ public class CreateRec  extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
-       /* try { 				
-            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
-            
-               
-          
-             
-        
-        
-        
-       }catch(HeadlessException | SQLException ex) {
-					JOptionPane.showMessageDialog(null,"Eror");
-        } 
-        
-        */
+    
         try {
                 
             
                                         String query="SELECT id FROM licenta.login  WHERE fullname ='"+nmm+"'";
-					String sqlt="INSERT INTO `licenta`.`recipes` (`name`, `ingredients`, `preparation_mode`, `type`,`dairy_products`,`meat`,`egg`,`fruit`,`vegetables`,`cereals`,`id`) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+					String sqlt="INSERT INTO `licenta`.`recipes` (`name`, `ingredients`, `preparation_mode`, `type`,`dairy_products`,`meat`,`egg`,`fruit`,`vegetables`,`cereals`,`id`,`images`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
                                         connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
 					ps =connection.prepareStatement(query);
                                         rs = ps.executeQuery();
@@ -296,10 +305,7 @@ public class CreateRec  extends javax.swing.JFrame {
 					pst.setString(1,nre.getText());
 					pst.setString(2,inre.getText());
 					pst.setString(3,mpre.getText());
-					pst.setString(4,tip.getSelectedItem().toString());
-                                        
-                                        
-                                        
+					pst.setString(4,tip.getSelectedItem().toString());                                                                            
                                         int l;
                                         int cr;
                                         int o;
@@ -340,11 +346,18 @@ public class CreateRec  extends javax.swing.JFrame {
                                             ce=1;
                                         }else{
                                             ce=0;}
-                                       pst.setString(10, String.valueOf(ce));
-                                        
-                                      pst.setString(11,adid);
-                                       pst.executeUpdate();
+                                       pst.setString(10, String.valueOf(ce));    
+                                       pst.setString(11,adid);
                                        
+                                         if(ImagePath !=null){  
+                                       try {
+                                        InputStream inps= new FileInputStream(new File(ImagePath));
+                                         pst.setBlob(12,inps);
+                                    } catch (FileNotFoundException ex) {
+                                        Logger.getLogger(CreateRec.class.getName()).log(Level.SEVERE, null, ex);
+                                    }}
+                                    if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
+                                       pst.executeUpdate();
 					JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
 				}catch(HeadlessException | SQLException ex) {
 					JOptionPane.showMessageDialog(null,"Eror");
@@ -374,6 +387,14 @@ public class CreateRec  extends javax.swing.JFrame {
     private void carActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_carActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        JFileChooser ch=new  JFileChooser();
+       ch.showOpenDialog(null);
+         File f=ch.getSelectedFile();
+        lbi.setIcon(new ImageIcon(f.toString()));         
+        ImagePath=f.getAbsolutePath();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,6 +442,7 @@ public class CreateRec  extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -435,6 +457,7 @@ public class CreateRec  extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JCheckBox lac;
+    private javax.swing.JLabel lbi;
     private javax.swing.JCheckBox leg;
     private javax.swing.JPanel menu;
     private java.awt.TextArea mpre;
