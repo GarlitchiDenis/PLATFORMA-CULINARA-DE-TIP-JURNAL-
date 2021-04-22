@@ -7,11 +7,14 @@ package FIRSTPAGE;
 
 import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -26,10 +29,9 @@ public class MyRecipes  extends javax.swing.JFrame {
     PreparedStatement pst = null;
    PreparedStatement ps = null;
    PreparedStatement prs= null;
-   PreparedStatement pp= null;
-   PreparedStatement ppp= null;
     ResultSet rs = null;
     ResultSet res = null;
+    public static String nm_rec;
     
    
     
@@ -53,12 +55,12 @@ public class MyRecipes  extends javax.swing.JFrame {
            rs = ps.executeQuery();
             if(rs.next()){
             addid=rs.getString("id");}
-           String sql="SELECT id_rec,name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"'"; 
+           String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"'"; 
            pst =connection.prepareStatement(sql);
            res = pst.executeQuery();
            
            t1.setModel(DbUtils.resultSetToTableModel(res));
-          // aa.setText(addid);
+          
 					
            
        }catch(SQLException ex) {
@@ -89,7 +91,8 @@ public class MyRecipes  extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         t1 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        aa = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -184,8 +187,21 @@ public class MyRecipes  extends javax.swing.JFrame {
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, -1, -1));
 
-        aa.setText("jLabel3");
-        jPanel1.add(aa, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 170, 60, 50));
+        jButton6.setText("OPEN");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, -1, -1));
+
+        jButton7.setText("EDIT");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
@@ -232,24 +248,38 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int row=t1.getSelectedRow();
-        String id_rec=t1.getModel().getValueAt(row,0).toString();
+        String n_rec=t1.getModel().getValueAt(row,0).toString();
         try{
-        String qur="DELETE FROM `licenta`.`recipes` WHERE id_rec='"+id_rec+"'";
-        String reset="ALTER TABLE `licenta`.`recipes` DROP id_rec";
-        String consecutinumber="ALTER TABLE `licenta`.`recipes` ADD id_rec INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST";
+        String qur="DELETE FROM `licenta`.`recipes` WHERE name='"+n_rec+"'";
         prs =connection.prepareStatement(qur);
         prs.executeUpdate();
         JOptionPane.showMessageDialog(null,"Reteta a fost stearsa cu succes");
-        aa.setText(id_rec);
-       pp =connection.prepareStatement(reset);
-       ppp =connection.prepareStatement(consecutinumber);
-       pp.executeUpdate();
-       ppp.executeUpdate();
         DisplayTable();
         
             
         }catch(SQLException e){}
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            int row=t1.getSelectedRow();
+            nm_rec=t1.getModel().getValueAt(row,0).toString();
+            dispose();
+            EditRec ed=new EditRec();
+            ed.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        dispose();
+        DisplayRec ed=new DisplayRec();
+        ed.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,13 +317,14 @@ public class MyRecipes  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel aa;
     private javax.swing.JLabel flname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
