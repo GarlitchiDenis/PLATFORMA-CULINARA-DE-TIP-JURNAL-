@@ -10,6 +10,9 @@ import Log.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -144,9 +147,13 @@ public class FRIENDS  extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
-        MyRecipes p=new MyRecipes();
-        p.setVisible(true);
+        try {
+            dispose();
+            MyRecipes p=new MyRecipes();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(FRIENDS.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
