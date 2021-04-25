@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -116,8 +117,8 @@ public class EditRec  extends javax.swing.JFrame {
                cer.setSelected(true);
             }else{
                 cer.setSelected(false);}  
-            //im = ImageIO.read(rs.getBinaryStream("images"));
-           // lbi.setIcon(new ImageIcon(im));
+           BufferedImage im = ImageIO.read(rs.getBinaryStream("images"));
+           lbi.setIcon(new ImageIcon(im));
             
 }   
        }catch(SQLException ex) {
@@ -366,58 +367,7 @@ public class EditRec  extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-   
-         /*
-        try {
-            
-          //  String query="UPDATE `licenta`.`recipes` SET `images`=null WHERE `id_rec`='"+adddid+"';";
-            String sqlt="UPDATE `licenta`.`recipes` SET `images`=? WHERE `id_rec`='"+adddid+"';";
-            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
-          //  pre =connection.prepareStatement(query);
-            pst =connection.prepareStatement(sqlt);
-           if(ImagePath !=null){
-                       
-            //   pre.executeUpdate();
-           aa.setText(ImagePath);
-            try {
-                                      
-                                     
-                                     
-                                         
-                                         
-                                            File image= new File(ImagePath);
-                                            FileInputStream fis=new FileInputStream(image);
-                                            ByteArrayOutputStream bos=new ByteArrayOutputStream();
-                                       byte[] buf=new byte[1024];
-                                       for(int redNum;(redNum=fis.read(buf))!=-1;){
-                                       bos.write(buf,0,redNum);
-                                       
-                                       }
-                   byte[] person_image = bos.toByteArray();
-                                       pst.setBytes(1, person_image);
-                                            pst.executeUpdate();
-                                      
-                                         if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
-                                         
-                                        
-                                    } catch (FileNotFoundException ex) {
-                                        Logger.getLogger(CreateRec.class.getName()).log(Level.SEVERE, null, ex);
-                                    } catch (IOException ex) {
-                    Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, ex);
-                }
-           if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
-                                         
-        
-           }else{ pre.executeUpdate();
-           JOptionPane.showMessageDialog(null,"gol");}
-        } catch (SQLException er) {
-            Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, er);
-        }
-         */
-         
-       
-        
-   try {
+     try {
                                          int l;
                                          int cr;
                                          int o;
@@ -468,11 +418,23 @@ public class EditRec  extends javax.swing.JFrame {
                                             ce=0;}
                                        pst.setString(10, String.valueOf(ce));    
                                        try {
-                                        InputStream inps= new FileInputStream(new File(ImagePath));
-                                         pst.setBlob(11,inps);
+                                           File image= new File(ImagePath);
+                                            FileInputStream fis=new FileInputStream(image);
+                                            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+                                       byte[] buf=new byte[1024];
+                                       for(int redNum;(redNum=fis.read(buf))!=-1;){
+                                       bos.write(buf,0,redNum);
+                                       }
+                                        byte[] person_image = bos.toByteArray();
+                                       pst.setBytes(11, person_image);
+                                            pst.executeUpdate();
+                                        
+                                         
                                     } catch (FileNotFoundException ex) {
                                         Logger.getLogger(CreateRec.class.getName()).log(Level.SEVERE, null, ex);
-                                    }}else{
+                                    }        catch (IOException ex) {
+                                                 Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, ex);
+                                             }}else{
                                       String sqlt="UPDATE `licenta`.`recipes` SET `name`=?,`ingredients`=?,`preparation_mode`=?,`type`=?,`dairy_products`=?,`meat`=?,`egg`=?,`fruit`=?,`vegetables`=?,`cereals`=?WHERE `id_rec`='"+adddid+"';";
                                         connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
                                         pst =connection.prepareStatement(sqlt);
