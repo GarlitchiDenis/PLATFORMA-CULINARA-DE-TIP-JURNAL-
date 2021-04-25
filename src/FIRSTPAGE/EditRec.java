@@ -9,22 +9,21 @@ import static FIRSTPAGE.HOME.nmm;
 import static FIRSTPAGE.MyRecipes.nm_rec;
 import Log.Login;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -39,14 +38,19 @@ public class EditRec  extends javax.swing.JFrame {
     static Connection connection = null;
     PreparedStatement pst = null;
     PreparedStatement ps = null;
+    PreparedStatement pre = null;
     ResultSet rs = null;
+    ResultSet res = null;
     static String ImagePath=null;
-     
+    static String adddid=null;
+ 
   
     
    
     /**
      * Creates new form Page1
+     * @throws java.sql.SQLException
+     * @throws java.io.IOException
      */
     public EditRec() throws SQLException, IOException {
         initComponents();
@@ -59,15 +63,16 @@ public class EditRec  extends javax.swing.JFrame {
     
      private void DisplayData() throws SQLException, IOException{
        try{
-           String addid=null;
+           
            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
            String query="SELECT * FROM licenta.recipes  WHERE name ='"+nm_rec+"'";
            ps =connection.prepareStatement(query);
            rs = ps.executeQuery();
            if(rs.next()){
+               adddid=rs.getString("id_rec");
             String ing = rs.getString("ingredients");
             inre.setText(ing);
-            String modp = rs.getString("preparation_mode");
+            String  modp = rs.getString("preparation_mode");
             mpre.setText(modp);
             String t = rs.getString("type");
             if("PRIVAT".equals(t)){
@@ -111,13 +116,14 @@ public class EditRec  extends javax.swing.JFrame {
                cer.setSelected(true);
             }else{
                 cer.setSelected(false);}  
-            BufferedImage im = ImageIO.read(rs.getBinaryStream("images"));
-            lbi.setIcon(new ImageIcon(im));
+            //im = ImageIO.read(rs.getBinaryStream("images"));
+           // lbi.setIcon(new ImageIcon(im));
             
 }   
        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null,"Eror");
 				}  
+        
     }
 
     /**
@@ -161,6 +167,7 @@ public class EditRec  extends javax.swing.JFrame {
         mpre = new java.awt.TextArea();
         lbi = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        aa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -215,11 +222,6 @@ public class EditRec  extends javax.swing.JFrame {
         opmen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 opmenMouseClicked(evt);
-            }
-        });
-        opmen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opmenActionPerformed(evt);
             }
         });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
@@ -321,6 +323,9 @@ public class EditRec  extends javax.swing.JFrame {
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
 
+        aa.setText("jLabel8");
+        jPanel1.add(aa, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 390, 70, 50));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
@@ -344,10 +349,6 @@ public class EditRec  extends javax.swing.JFrame {
         lg.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void opmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opmenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_opmenActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
         FRIENDS p=new FRIENDS();
@@ -365,25 +366,164 @@ public class EditRec  extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-    
+   
+         /*
         try {
-                //sa iau  id ul de la createrec
-                //adaug where id in query
             
-                              		//String sqlt="ALTER TABLE `licenta`.`recipes` SET `name`='"+nre+"', `ingredients`='"++"', `preparation_mode`='"++"', `type`='"++"',`dairy_products`='"++"',`meat`='"++"',`egg`='"++"',`fruit`='"++"',`vegetables`='"++"',`cereals`='"++"',`id`='"++"',`images`='"++"';";
-					String sqlt="ALTER TABLE `licenta`.`recipes` SET `name`='"+nre+"' WHERE ;";
-                                        connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
-                                        pst =connection.prepareStatement(sqlt);
-                                        pst.setString(1,nre.getText());
-                                 
-                                    if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"UPDATE");}else{JOptionPane.showMessageDialog(null,"nup");}
-                                       pst.executeUpdate();
-					JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
-				}catch(HeadlessException | SQLException ex) {
-					JOptionPane.showMessageDialog(null,"Eror");
+          //  String query="UPDATE `licenta`.`recipes` SET `images`=null WHERE `id_rec`='"+adddid+"';";
+            String sqlt="UPDATE `licenta`.`recipes` SET `images`=? WHERE `id_rec`='"+adddid+"';";
+            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+          //  pre =connection.prepareStatement(query);
+            pst =connection.prepareStatement(sqlt);
+           if(ImagePath !=null){
+                       
+            //   pre.executeUpdate();
+           aa.setText(ImagePath);
+            try {
+                                      
+                                     
+                                     
+                                         
+                                         
+                                            File image= new File(ImagePath);
+                                            FileInputStream fis=new FileInputStream(image);
+                                            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+                                       byte[] buf=new byte[1024];
+                                       for(int redNum;(redNum=fis.read(buf))!=-1;){
+                                       bos.write(buf,0,redNum);
+                                       
+                                       }
+                   byte[] person_image = bos.toByteArray();
+                                       pst.setBytes(1, person_image);
+                                            pst.executeUpdate();
+                                      
+                                         if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
+                                         
                                         
-				} 
+                                    } catch (FileNotFoundException ex) {
+                                        Logger.getLogger(CreateRec.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (IOException ex) {
+                    Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
+                                         
+        
+           }else{ pre.executeUpdate();
+           JOptionPane.showMessageDialog(null,"gol");}
+        } catch (SQLException er) {
+            Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, er);
+        }
+         */
+         
+       
+        
+   try {
+                                         int l;
+                                         int cr;
+                                         int o;
+                                         int fr;
+                                         int le;
+                                         int ce;
+                                         if(ImagePath !=null){
+                                         String sqlt="UPDATE `licenta`.`recipes` SET `name`=?,`ingredients`=?,`preparation_mode`=?,`type`=?,`dairy_products`=?,`meat`=?,`egg`=?,`fruit`=?,`vegetables`=?,`cereals`=?,`images`=? WHERE `id_rec`='"+adddid+"';";
+                                        connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+                                        pst =connection.prepareStatement(sqlt);
+					pst.setString(1,nre.getText());
+					pst.setString(2,inre.getText());
+					pst.setString(3,mpre.getText());
+					pst.setString(4,tip.getSelectedItem().toString());                                                                            
+                                        if(lac.isSelected()){
+                                            l=1;
+                                        }else{
+                                            l=0;}
+                                       pst.setString(5, String.valueOf(l));
+                                      
+                                       if(car.isSelected()){
+                                            cr=1;
+                                        }else{
+                                            cr=0;}
+                                       pst.setString(6, String.valueOf(cr));
+                                       
+                                       if(ou.isSelected()){
+                                            o=1;
+                                        }else{
+                                            o=0;}
+                                       pst.setString(7, String.valueOf(o));
+                                       
+                                       if(fruc.isSelected()){
+                                            fr=1;
+                                        }else{
+                                            fr=0;}
+                                       pst.setString(8, String.valueOf(fr));
+                                       
+                                        if(leg.isSelected()){
+                                            le=1;
+                                        }else{
+                                            le=0;}
+                                       pst.setString(9, String.valueOf(le));
+                                       
+                                        if(cer.isSelected()){
+                                            ce=1;
+                                        }else{
+                                            ce=0;}
+                                       pst.setString(10, String.valueOf(ce));    
+                                       try {
+                                        InputStream inps= new FileInputStream(new File(ImagePath));
+                                         pst.setBlob(11,inps);
+                                    } catch (FileNotFoundException ex) {
+                                        Logger.getLogger(CreateRec.class.getName()).log(Level.SEVERE, null, ex);
+                                    }}else{
+                                      String sqlt="UPDATE `licenta`.`recipes` SET `name`=?,`ingredients`=?,`preparation_mode`=?,`type`=?,`dairy_products`=?,`meat`=?,`egg`=?,`fruit`=?,`vegetables`=?,`cereals`=?WHERE `id_rec`='"+adddid+"';";
+                                        connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+                                        pst =connection.prepareStatement(sqlt);
+					pst.setString(1,nre.getText());
+					pst.setString(2,inre.getText());
+					pst.setString(3,mpre.getText());
+					pst.setString(4,tip.getSelectedItem().toString());                                                                            
+                                        
+                                        if(lac.isSelected()){
+                                            l=1;
+                                        }else{
+                                            l=0;}
+                                       pst.setString(5, String.valueOf(l));
+                                      
+                                       if(car.isSelected()){
+                                            cr=1;
+                                        }else{
+                                            cr=0;}
+                                       pst.setString(6, String.valueOf(cr));
+                                       
+                                       if(ou.isSelected()){
+                                            o=1;
+                                        }else{
+                                            o=0;}
+                                       pst.setString(7, String.valueOf(o));
+                                       
+                                       if(fruc.isSelected()){
+                                            fr=1;
+                                        }else{
+                                            fr=0;}
+                                       pst.setString(8, String.valueOf(fr));
+                                       
+                                        if(leg.isSelected()){
+                                            le=1;
+                                        }else{
+                                            le=0;}
+                                       pst.setString(9, String.valueOf(le));
+                                       
+                                        if(cer.isSelected()){
+                                            ce=1;
+                                        }else{
+                                            ce=0;}
+                                       pst.setString(10, String.valueOf(ce)); 
+                                           
+                                         }
+                                        if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
+                                       pst.executeUpdate();
+                                       JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
+    }catch(HeadlessException | SQLException ex) {
+	JOptionPane.showMessageDialog(null,"nu merge");} 
+                                      
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerActionPerformed
@@ -455,6 +595,7 @@ public class EditRec  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel aa;
     private javax.swing.JCheckBox car;
     private javax.swing.JCheckBox cer;
     private javax.swing.JLabel flname;

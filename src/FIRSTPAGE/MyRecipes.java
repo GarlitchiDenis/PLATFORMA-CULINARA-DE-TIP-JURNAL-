@@ -32,6 +32,7 @@ public class MyRecipes  extends javax.swing.JFrame {
     ResultSet rs = null;
     ResultSet res = null;
     public static String nm_rec;
+    public static String addid=null;
     
    
     
@@ -48,7 +49,7 @@ public class MyRecipes  extends javax.swing.JFrame {
     
     private void DisplayTable() throws SQLException{
        try{
-           String addid=null;
+           
            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
            String query="SELECT id FROM licenta.login  WHERE fullname ='"+nmm+"'";
            ps =connection.prepareStatement(query);
@@ -58,6 +59,8 @@ public class MyRecipes  extends javax.swing.JFrame {
            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"'"; 
            pst =connection.prepareStatement(sql);
            res = pst.executeQuery();
+           
+           
            
            t1.setModel(DbUtils.resultSetToTableModel(res));
           
