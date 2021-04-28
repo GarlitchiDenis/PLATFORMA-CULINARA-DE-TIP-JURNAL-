@@ -33,12 +33,12 @@ public class MyRecipes  extends javax.swing.JFrame {
     ResultSet res = null;
     public static String nm_rec;
     public static String addid=null;
-    public static int cc1=0;
-    public static int cc2=0;
-    public static int cc3=0;
-    public static int cc4=0;
-    public static int cc5=0;
-    public static int cc6=0;
+    public int cc1=0;
+    public  int cc2=0;
+    public  int cc3=0;
+    public  int cc4=0;
+    public  int cc5=0;
+    public  int cc6=0;
     
    
     
@@ -54,17 +54,58 @@ public class MyRecipes  extends javax.swing.JFrame {
     }
     
     private void DisplayTable() throws SQLException{
-    try{     
-           
+    try{   
+            int l,cr,o,fr,le,ce;
+                                       
+            if(lac.isSelected()){
+                l=1;
+            }else{
+                l=2;}
+           if(car.isSelected()){
+                cr=1;
+            }else{
+                cr=2;}
+           if(ou.isSelected()){
+                o=1;
+            }else{
+                o=2;}
+           if(fruc.isSelected()){
+                fr=1;
+            }else{
+                fr=2;}
+            if(leg.isSelected()){
+                le=1;
+            }else{
+                le=2;}
+            if(cer.isSelected()){
+                ce=1;
+            }else{
+                ce=2;}
+            
            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
            String query="SELECT id FROM licenta.login  WHERE fullname ='"+nmm+"'";
            ps =connection.prepareStatement(query);
+            String sql;
            rs = ps.executeQuery();
             if(rs.next()){
             addid=rs.getString("id");}
-         // lac car ou fruc leg cer
+            if(lac.isSelected() || car.isSelected() || ou.isSelected()|| fruc.isSelected() || leg.isSelected() || cer.isSelected()){
+            sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `dairy_products`='"+l+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `meat`='"+cr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `egg`='"+o+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `fruit`='"+fr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `vegetables`='"+le+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `cereals`='"+ce+"'"; 
+            }else{sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"'";}
+            
+            pst =connection.prepareStatement(sql);
+            res = pst.executeQuery();
+            t1.setModel(DbUtils.resultSetToTableModel(res));
+            
+
+
+
+
+
+
+           // lac car ou fruc leg cer
          // 1   2   3   4    5   6
-         	
+         /*	
            if(cer.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cc4%2==0 && cc5%2==0){
             //2
             String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `cereals`=1"; 
@@ -590,7 +631,7 @@ public class MyRecipes  extends javax.swing.JFrame {
            pst =connection.prepareStatement(sql);
            res = pst.executeQuery();
            t1.setModel(DbUtils.resultSetToTableModel(res));}
-           
+           */
            
            
            
