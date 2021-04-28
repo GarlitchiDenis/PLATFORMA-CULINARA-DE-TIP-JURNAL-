@@ -6,6 +6,7 @@
 package FIRSTPAGE;
 
 import static FIRSTPAGE.HOME.nmm;
+import Friends.DisplayFriends;
 import Log.Login;
 import java.awt.HeadlessException;
 import java.io.File;
@@ -277,7 +278,7 @@ public class CreateRec  extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        FRIENDS p=new FRIENDS();
+        DisplayFriends p=new DisplayFriends();
         p.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

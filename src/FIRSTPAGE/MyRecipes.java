@@ -6,6 +6,7 @@
 package FIRSTPAGE;
 
 import static FIRSTPAGE.HOME.nmm;
+import Friends.DisplayFriends;
 import Log.Login;
 import java.io.IOException;
 import java.sql.Connection;
@@ -28,8 +29,10 @@ public class MyRecipes  extends javax.swing.JFrame {
     static Connection connection = null;
     PreparedStatement pst = null;
    PreparedStatement ps = null;
+   PreparedStatement ps2 = null;
    PreparedStatement prs= null;
     ResultSet rs = null;
+    ResultSet rs2 = null;
     ResultSet res = null;
     public static String nm_rec;
     public static String addid=null;
@@ -39,6 +42,13 @@ public class MyRecipes  extends javax.swing.JFrame {
     public  int cc4=0;
     public  int cc5=0;
     public  int cc6=0;
+    public  int l=0;
+    public  int cr=0;
+    public  int o=0;
+    public  int fr=0;
+    public  int le=0;
+    public  int ce=0;
+    
     
    
     
@@ -55,33 +65,23 @@ public class MyRecipes  extends javax.swing.JFrame {
     
     private void DisplayTable() throws SQLException{
     try{   
-            int l,cr,o,fr,le,ce;
-                                       
-            if(lac.isSelected()){
-                l=1;
-            }else{
-                l=2;}
-           if(car.isSelected()){
-                cr=1;
-            }else{
-                cr=2;}
-           if(ou.isSelected()){
-                o=1;
-            }else{
-                o=2;}
-           if(fruc.isSelected()){
-                fr=1;
-            }else{
-                fr=2;}
-            if(leg.isSelected()){
-                le=1;
-            }else{
-                le=2;}
-            if(cer.isSelected()){
-                ce=1;
-            }else{
-                ce=2;}
-            
+           
+        
+          /*
+           String sqlt="SELECT * FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND  `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  )  AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  ) AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  ) AND  `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  ) and `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id=21 AND t2.id_rec=t1.id_rec  ) AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec)";
+           connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
+					ps2 =connection.prepareStatement(sqlt);
+                                        rs2 = ps2.executeQuery();
+                                        if(rs2.next()){
+                                                l=Integer.parseInt(rs2.getString("dairy_products"));
+                                                cr=Integer.parseInt(rs2.getString("meat"));
+                                                o=Integer.parseInt(rs2.getString("egg"));
+                                                fr=Integer.parseInt(rs2.getString("fruit"));
+                                                le=Integer.parseInt(rs2.getString("vegetables"));
+                                                ce=Integer.parseInt(rs2.getString("cereals"));}
+                                        */
+           
+           
            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
            String query="SELECT id FROM licenta.login  WHERE fullname ='"+nmm+"'";
            ps =connection.prepareStatement(query);
@@ -90,550 +90,37 @@ public class MyRecipes  extends javax.swing.JFrame {
             if(rs.next()){
             addid=rs.getString("id");}
             if(lac.isSelected() || car.isSelected() || ou.isSelected()|| fruc.isSelected() || leg.isSelected() || cer.isSelected()){
-            sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `dairy_products`='"+l+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `meat`='"+cr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `egg`='"+o+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `fruit`='"+fr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `vegetables`='"+le+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `cereals`='"+ce+"'"; 
+               // sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND  `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `dairy_products`='"+l+"' )  AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `meat`='"+cr+"'  ) AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `egg`='"+o+"'  ) AND  `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `fruit`='"+fr+"'  ) and `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id=21 AND t2.id_rec=t1.id_rec AND `vegetables`='"+le+"'  ) AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `cereals`='"+ce+"')";
+                 // sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `dairy_products`='"+l+"'  AND IF('"+l+"'=1, `dairy_products`=1, `dairy_products`=`dairy_products`)) AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `meat`='"+cr+"' AND IF(`meat`='"+cr+"', `meat`=1, `meat`=`meat`)) AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `egg`='"+o+"' AND IF('"+o+"'=1, `egg`=1, `egg`=`egg`)) AND `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `fruit`='"+fr+"' AND IF('"+fr+"'=1, `fruit`=1, `fruit`=`fruit`)) AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `cereals`='"+ce+"' AND IF('"+ce+"'=1, `cereals`=1, `cereals`=`cereals`))  AND  `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `vegetables`='"+le+"' AND IF('"+le+"'=1, `vegetables`=1, `vegetables`=`vegetables`)  )";
+              // sql="SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `dairy_products`='"+l+"' AND IF(`dairy_products`=1, `dairy_products`=1, `dairy_products`=`dairy_products`)) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `meat`='"+cr+"' AND IF(`meat`=1, `meat`=1, `meat`=`meat`)  ) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `egg`='"+o+"' AND IF(`egg`=1, `egg`=1, `egg`=`egg`)  ) UNION SELECT * FROM licenta.recipesas t1 WHERE id ='"+addid+"' AND  `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `fruit`='"+fr+"' AND IF(`fruit`=1, `fruit`=1, `fruit`=`fruit`)) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `vegetables`='"+le+"' AND IF(`vegetables`=1, `vegetables`=1, `vegetables`=`vegetables`)  ) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `cereals`='"+ce+"' AND IF(`cereals`=1, `cereals`=1, `cereals`=`cereals`))"; 
+               //sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `dairy_products`='"+l+"' AND IF(`dairy_products`=1, `dairy_products`=1, `dairy_products`=`dairy_products`) UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `meat`='"+cr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `egg`='"+o+"' AND IF(`egg`=1, `egg`=1, `egg`=`egg`) UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `fruit`='"+fr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `vegetables`='"+le+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `cereals`='"+ce+"'";  
+                sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";
+           l1.setText(String.valueOf(l));
+           l2.setText(String.valueOf(cr));
+           l3.setText(String.valueOf(o));
+           l4.setText(String.valueOf(fr));
+           l5.setText(String.valueOf(le));
+           l6.setText(String.valueOf(ce));
+
+// sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND  `dairy_products`= '"+l+"' AND IF(`dairy_products`=1, `dairy_products`=1, `dairy_products`=`dairy_products`)";
+              // SELECT * FROM licenta.recipes where vegetables=1 or  IF(vegetables=1, vegetables=1, vegetables=vegetables)
+
+
+             
+             ps2 =connection.prepareStatement(sql);
+                                              rs2 = ps2.executeQuery();  
+                                              if(res.next()){
+                                                l=Integer.parseInt(res.getString("dairy_products"));
+                                                cr=Integer.parseInt(res.getString("meat"));
+                                                o=Integer.parseInt(res.getString("egg"));
+                                                fr=Integer.parseInt(res.getString("fruit"));
+                                                le=Integer.parseInt(res.getString("vegetables"));
+                                                ce=Integer.parseInt(res.getString("cereals"));}
             }else{sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"'";}
-            
             pst =connection.prepareStatement(sql);
             res = pst.executeQuery();
             t1.setModel(DbUtils.resultSetToTableModel(res));
             
-
-
-
-
-
-
-           // lac car ou fruc leg cer
-         // 1   2   3   4    5   6
-         /*	
-           if(cer.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cc4%2==0 && cc5%2==0){
-            //2
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(leg.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cc4%2==0 && cc6%2==0){
-            //3
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(leg.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cc4%2==0 && cer.isSelected()){
-            //4
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(fruc.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cc5%2==0 && cc6%2==0){
-            //5
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(fruc.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cc5%2==0 && cer.isSelected()){
-            //6
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `fruit`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(fruc.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cc6%2==0 && leg.isSelected()){
-            //7
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `fruit`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(fruc.isSelected() && cc1%2==0 && cc2%2==0 && cc3%2==0 && cer.isSelected() && leg.isSelected()){
-            //8
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `fruit`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && cc4%2==0 && cc5%2==0 && cc6%2==0){
-            //9
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && cc4%2==0 && cc5%2==0 && cer.isSelected()){
-            //10
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && cc4%2==0 && cc6%2==0 && leg.isSelected()){
-            //11
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && cc4%2==0 && cer.isSelected() && leg.isSelected()){
-            //12
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && fruc.isSelected() && cc5%2==0  && cc6%2==0){
-            //13
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1 AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && fruc.isSelected() && cc5%2==0  && cer.isSelected()){
-            //14
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1 AND `fruit`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-            
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && fruc.isSelected() && cc6%2==0  && leg.isSelected()){
-            //15
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1 AND `fruit`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-            
-           else if(ou.isSelected() && cc1%2==0 && cc2%2==0 && fruc.isSelected() && cer.isSelected()  && leg.isSelected()){
-            //16
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `egg`=1 AND `fruit`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && cc4%2==0 && cc5%2==0  && cc6%2==0){
-            //17
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && cc4%2==0 && cc5%2==0  && cer.isSelected()){
-            //18
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && cc4%2==0 && leg.isSelected()  &&  cc6%2==0){
-            //19
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && cc4%2==0 && leg.isSelected()  &&  cer.isSelected()){
-            //20
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `vegetables`=1  AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && fruc.isSelected() && cc5%2==0  &&  cc6%2==0){
-            //21
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && fruc.isSelected() && cc5%2==0  &&  cer.isSelected()){
-            //22
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `fruit`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && fruc.isSelected() && leg.isSelected()  &&  cc6%2==0){
-            //23
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `fruit`=1  AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && cc3%2==0 && fruc.isSelected() && leg.isSelected()  &&  cer.isSelected()){
-            //24
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `fruit`=1  AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && cc4%2==0 && cc5%2==0  &&  cc6%2==0){
-            //25
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && cc4%2==0 && cc5%2==0  && cer.isSelected()){
-            //26
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && cc4%2==0 && leg.isSelected()  && cc6%2==0){
-            //27
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && cc4%2==0 && leg.isSelected()  && cer.isSelected()){
-            //28
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && fruc.isSelected() && cc5%2==0  && cc6%2==0){
-            //29
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1 AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && fruc.isSelected() && cc5%2==0  && cer.isSelected()){
-            //30
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1 AND `fruit`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && fruc.isSelected() && leg.isSelected()  &&cc6%2==0){
-            //31
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1 AND `fruit`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(cc1%2==0 && car.isSelected() && ou.isSelected() && fruc.isSelected() && leg.isSelected()  && cer.isSelected()){
-            //32
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `meat`=1  AND `egg`=1 AND `fruit`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && cc4%2==0 && cc5%2==0  && cc6%2==0){
-            //33
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && cc4%2==0 && cc5%2==0  && cer.isSelected()){
-            //34
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && cc4%2==0 && leg.isSelected()  && cc6%2==0){
-            //35
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && cc4%2==0 && leg.isSelected() && cer.isSelected()){
-            //36
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && fruc.isSelected() && cc5%2==0 && cc6%2==0){
-            //37
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && fruc.isSelected() && cc5%2==0 && cer.isSelected()){
-            //38
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `fruit`=1  AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && fruc.isSelected() && leg.isSelected() && cc6%2==0){
-            //39
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `fruit`=1  AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && fruc.isSelected() && leg.isSelected() && cer.isSelected()){
-            //40
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `fruit`=1  AND `vegetables`=1  AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && cc3%2==0 && fruc.isSelected() && leg.isSelected() && cer.isSelected()){
-            //40
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `fruit`=1  AND `vegetables`=1  AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && cc4%2==0 && cc5%2==0 && cc6%2==0){
-            //41
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 "; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && cc4%2==0 && cc5%2==0 && cer.isSelected()){
-            //42
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 AND `cereals`=1 "; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && cc4%2==0 && leg.isSelected() && cc6%2==0){
-            //43
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && cc4%2==0 && leg.isSelected() && cer.isSelected()){
-            //44
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && fruc.isSelected() && cc5%2==0 && cc6%2==0){
-            //45
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && fruc.isSelected() && cc5%2==0 && cer.isSelected()){
-            //46
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 AND `fruit`=1  AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && fruc.isSelected() && leg.isSelected() &&cc6%2==0){
-            //47
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 AND `fruit`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && cc2%2==0 && ou.isSelected() && fruc.isSelected() && leg.isSelected() &&cer.isSelected()){
-            //48
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `egg`=1 AND `fruit`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && cc4%2==0 && cc5%2==0 && cc6%2==0){
-            //49
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && cc4%2==0 && cc5%2==0 && cer.isSelected()){
-            //50
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && cc4%2==0 && leg.isSelected() && cc6%2==0){
-            //51
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && cc4%2==0 && leg.isSelected() && cer.isSelected()){
-            //52
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && fruc.isSelected() && cc5%2==0 && cc6%2==0){
-            //53
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && fruc.isSelected() && cc5%2==0 && cer.isSelected()){
-            //54
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `fruit`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && fruc.isSelected() && leg.isSelected() && cc6%2==0){
-            //55
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `fruit`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && cc3%2==0 && fruc.isSelected() && leg.isSelected() && cer.isSelected()){
-            //56
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `fruit`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && cc4%2==0 && cc5%2==0 && cc6%2==0){
-            //57
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && cc4%2==0 && cc5%2==0 && cer.isSelected()){
-            //58
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && cc4%2==0 && leg.isSelected() && cc6%2==0){
-            //59
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && cc4%2==0 && leg.isSelected() && cer.isSelected()){
-            //60
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && fruc.isSelected() && cc5%2==0 && cc6%2==0){
-            //61
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1 AND `fruit`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && fruc.isSelected() && cc5%2==0 && cer.isSelected()){
-            //62
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1 AND `fruit`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && fruc.isSelected() && leg.isSelected() && cc6%2==0){
-            //63
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1 AND `fruit`=1 AND `vegetables`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           else if(lac.isSelected() && car.isSelected() && ou.isSelected() && fruc.isSelected() && leg.isSelected() && cer.isSelected()){
-            //63
-            String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND `dairy_products`=1 AND `meat`=1  AND `egg`=1 AND `fruit`=1 AND `vegetables`=1 AND `cereals`=1"; 
-            pst =connection.prepareStatement(sql);
-            res = pst.executeQuery();
-            t1.setModel(DbUtils.resultSetToTableModel(res));
-            JOptionPane.showMessageDialog(null,"checkbox check");}
-           
-           
-           
-           
-           
-           
-           else{
-             //1
-           String sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"'"; 
-           pst =connection.prepareStatement(sql);
-           res = pst.executeQuery();
-           t1.setModel(DbUtils.resultSetToTableModel(res));}
-           */
-           
-           
            
        }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null,"Eror");
@@ -678,6 +165,12 @@ public class MyRecipes  extends javax.swing.JFrame {
         ou = new javax.swing.JCheckBox();
         fruc = new javax.swing.JCheckBox();
         leg = new javax.swing.JCheckBox();
+        l6 = new javax.swing.JLabel();
+        l1 = new javax.swing.JLabel();
+        l2 = new javax.swing.JLabel();
+        l3 = new javax.swing.JLabel();
+        l4 = new javax.swing.JLabel();
+        l5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -849,6 +342,24 @@ public class MyRecipes  extends javax.swing.JFrame {
         });
         jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
 
+        l6.setText("jLabel9");
+        jPanel1.add(l6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 270, -1, -1));
+
+        l1.setText("jLabel9");
+        jPanel1.add(l1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, -1, -1));
+
+        l2.setText("jLabel9");
+        jPanel1.add(l2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 110, -1, -1));
+
+        l3.setText("jLabel9");
+        jPanel1.add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 150, -1, -1));
+
+        l4.setText("jLabel9");
+        jPanel1.add(l4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 190, -1, -1));
+
+        l5.setText("jLabel9");
+        jPanel1.add(l5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 230, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
@@ -878,7 +389,7 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        FRIENDS p=new FRIENDS();
+        DisplayFriends p=new DisplayFriends();
         p.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -932,16 +443,18 @@ public class MyRecipes  extends javax.swing.JFrame {
     private void lacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lacActionPerformed
         
                 cc1++;
-                if(cc1%2==0){JOptionPane.showMessageDialog(null,"nu ii");
+                if(cc1%2==0){
                 lac.setSelected(false);
+                l=0;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
                         Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
                     }
 }
-                else{JOptionPane.showMessageDialog(null,"ii bifat");
+                else{
                 lac.setSelected(true);
+                l=1;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
@@ -952,14 +465,19 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     private void carActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carActionPerformed
                 cc2++;
-                if(cc2%2==0){JOptionPane.showMessageDialog(null,"nu ii");
+                if(cc2%2==0){
+                   car.setSelected(false);
+                   cr=0;
+                   
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
                         Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
                     }
 }
-                else{JOptionPane.showMessageDialog(null,"ii bifat");
+                else{
+                    car.setSelected(true);
+                    cr=1;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
@@ -970,14 +488,19 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     private void ouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ouActionPerformed
                 cc3++;
-                if(cc3%2==0){JOptionPane.showMessageDialog(null,"nu ii");
+                if(cc3%2==0){
+                   ou.setSelected(false);
+                   o=0;
+                   
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
                         Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
                     }
 }
-                else{JOptionPane.showMessageDialog(null,"ii bifat");
+                else{
+                    ou.setSelected(true);
+                    o=1;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
@@ -988,14 +511,19 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     private void frucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frucActionPerformed
                 cc4++;
-                if(cc4%2==0){JOptionPane.showMessageDialog(null,"nu ii");
+                if(cc4%2==0){
+                    fruc.setSelected(false);
+                    fr=0;
+                    
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
                         Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
                     }
 }
-                else{JOptionPane.showMessageDialog(null,"ii bifat");
+                else{
+                    fruc.setSelected(true);
+                    fr=1;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
@@ -1006,14 +534,19 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     private void legActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_legActionPerformed
                 cc5++;
-                if(cc5%2==0){JOptionPane.showMessageDialog(null,"nu ii");
+                if(cc5%2==0){
+                    leg.setSelected(false);
+                    le=0;
+                    
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
                         Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
                     }
 }
-                else{JOptionPane.showMessageDialog(null,"ii bifat");
+                else{
+                    leg.setSelected(true);
+                    le=1;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
@@ -1024,14 +557,18 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     private void cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerActionPerformed
                 cc6++;
-                if(cc6%2==0){JOptionPane.showMessageDialog(null,"nu ii");
+                if(cc6%2==0){
+                    cer.setSelected(false);  
+                    int ce =0 ;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
                         Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
                     }
 }
-                else{JOptionPane.showMessageDialog(null,"ii bifat");
+                else{
+                    cer.setSelected(true);
+                    ce=1;
                     try {
                         DisplayTable();
                     } catch (SQLException ex) {
@@ -1097,6 +634,12 @@ public class MyRecipes  extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel l1;
+    private javax.swing.JLabel l2;
+    private javax.swing.JLabel l3;
+    private javax.swing.JLabel l4;
+    private javax.swing.JLabel l5;
+    private javax.swing.JLabel l6;
     private javax.swing.JCheckBox lac;
     private javax.swing.JCheckBox leg;
     private javax.swing.JPanel menu;

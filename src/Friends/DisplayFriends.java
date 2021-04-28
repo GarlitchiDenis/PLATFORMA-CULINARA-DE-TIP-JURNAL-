@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FIRSTPAGE;
+package Friends;
 
+import FIRSTPAGE.*;
 import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
 import java.sql.Connection;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author garli
  */
-public class FRIENDS  extends javax.swing.JFrame {
+public class DisplayFriends  extends javax.swing.JFrame {
 
     private int count=0;
     static Connection connection = null;
@@ -28,7 +29,7 @@ public class FRIENDS  extends javax.swing.JFrame {
     /**
      * Creates new form Page1
      */
-    public FRIENDS() {
+    public DisplayFriends() {
         initComponents();
         flname.setText(nmm);
         
@@ -52,6 +53,11 @@ public class FRIENDS  extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         opmen = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        t2 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,6 +121,30 @@ public class FRIENDS  extends javax.swing.JFrame {
         });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
+        t2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(t2);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, 210));
+
+        jButton4.setText("OPEN");
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, -1, -1));
+
+        jButton5.setText("ADD");
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, -1, -1));
+
+        jButton6.setText("DELETE");
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
@@ -152,7 +182,7 @@ public class FRIENDS  extends javax.swing.JFrame {
             MyRecipes p=new MyRecipes();
             p.setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(FRIENDS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DisplayFriends.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -197,10 +227,15 @@ public class FRIENDS  extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menu;
     private javax.swing.JButton opmen;
+    private javax.swing.JTable t2;
     // End of variables declaration//GEN-END:variables
 }
