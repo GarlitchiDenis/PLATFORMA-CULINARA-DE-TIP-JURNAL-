@@ -7,6 +7,7 @@ package Register;
 
 import Log.Login;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,13 +20,20 @@ import javax.swing.JOptionPane;
  */
 public class Register extends javax.swing.JFrame {
 
-    static Connection connection =null;		
-	PreparedStatement pst= null;
+    static Connection connection = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form Register
      */
     public Register() {
         initComponents();
+        Seticon();
+
+    }
+
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("diary.png")));
     }
 
     /**
@@ -37,6 +45,7 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
         jPanel1 = new javax.swing.JPanel();
         usr = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
@@ -55,6 +64,7 @@ public class Register extends javax.swing.JFrame {
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,6 +161,7 @@ public class Register extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
@@ -158,23 +169,22 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_fnameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     try {
-					String sqlt=	"INSERT INTO `licenta`.`login` (`username`, `password`, `email`, `gender`,`fullname`) VALUES (?,?,?,?,?);";
-					connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
-					pst =connection.prepareStatement(sqlt);
-					pst.setString(1,usr.getText());
-					pst.setString(2,psw.getText());
-					pst.setString(3,email.getText());
-					pst.setString(4,gen.getSelectedItem().toString());
-					pst.setString(5,fname.getText());
-					pst.executeUpdate();
-					JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
-				}catch(HeadlessException | SQLException ex) {
-					JOptionPane.showMessageDialog(null,"Eror");
-				}   
-        
-        
-        
+        try {
+            String sqlt = "INSERT INTO `licenta`.`login` (`username`, `password`, `email`, `gender`,`fullname`) VALUES (?,?,?,?,?);";
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root", "000000");
+            pst = connection.prepareStatement(sqlt);
+            pst.setString(1, usr.getText());
+            pst.setString(2, psw.getText());
+            pst.setString(3, email.getText());
+            pst.setString(4, gen.getSelectedItem().toString());
+            pst.setString(5, fname.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Register SUCCESSFULY");
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Eror");
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void pswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswActionPerformed
@@ -183,7 +193,7 @@ public class Register extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         dispose();
-        Login lg= new Login();
+        Login lg = new Login();
         lg.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
@@ -203,22 +213,16 @@ public class Register extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Register().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Register().setVisible(true);
         });
     }
 
