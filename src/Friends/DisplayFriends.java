@@ -8,12 +8,17 @@ package Friends;
 import FIRSTPAGE.*;
 import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
+import java.awt.Container;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -23,16 +28,49 @@ public class DisplayFriends  extends javax.swing.JFrame {
 
     private int count=0;
     static Connection connection = null;
-    PreparedStatement pst = null;
     ResultSet rs = null;
+    ResultSet rs2 = null;
+    ResultSet rs3 = null;
+    PreparedStatement ps = null;
+    PreparedStatement ps2 = null;
+    PreparedStatement ps3 = null;
+    PreparedStatement ps4 = null;
+    PreparedStatement ps5 = null;
+    public static String addid=null;
+    public static String nm_fr;
    
     /**
      * Creates new form Page1
+     * @throws java.sql.SQLException
      */
-    public DisplayFriends() {
+    public DisplayFriends() throws SQLException {
         initComponents();
         flname.setText(nmm);
+        DisplayTable();
+
         
+    }
+    
+    private void DisplayTable() throws SQLException{
+    try{   
+           
+           
+           
+           connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
+           String query="SELECT id FROM licenta.login  WHERE fullname ='"+nmm+"'";
+           ps =connection.prepareStatement(query);
+           rs = ps.executeQuery();
+           if(rs.next()){
+           addid=rs.getString("id");    
+           String sql="SELECT fullname as Prieteni FROM licenta.friends WHERE id_user ='"+addid+"'";
+           ps2 =connection.prepareStatement(sql);
+           rs2 = ps2.executeQuery();
+           t2.setModel(DbUtils.resultSetToTableModel(rs2));
+           }
+       }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Eror");
+				}  
+    
     }
 
     /**
@@ -45,6 +83,10 @@ public class DisplayFriends  extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        addframe = new javax.swing.JInternalFrame();
+        adfr = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         menu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -63,6 +105,36 @@ public class DisplayFriends  extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addframe.setVisible(false);
+        Container pane = ((BasicInternalFrameUI) addframe.getUI()).getNorthPane();
+        pane.getComponent(0).setVisible(false);
+        addframe.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        adfr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adfrActionPerformed(evt);
+            }
+        });
+        addframe.getContentPane().add(adfr, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 260, 60));
+
+        jButton7.setText("add");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        addframe.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+
+        jButton8.setText("cancel");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        addframe.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+
+        jPanel1.add(addframe, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 410, 270));
 
         menu.hide();
         menu.setBackground(new java.awt.Color(204, 255, 204));
@@ -134,15 +206,30 @@ public class DisplayFriends  extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(t2);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, 210));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, 210));
 
         jButton4.setText("OPEN");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, -1, -1));
 
         jButton5.setText("ADD");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, -1, -1));
 
         jButton6.setText("DELETE");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
@@ -186,6 +273,73 @@ public class DisplayFriends  extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int row=t2.getSelectedRow();
+        String n_friend=t2.getModel().getValueAt(row,0).toString();
+        try{
+            String qur="DELETE FROM `licenta`.`friends` WHERE fullname='"+n_friend+"' AND id_user='"+addid+"'";
+            ps3 =connection.prepareStatement(qur);
+            ps3.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Reteta a fost stearsa cu succes");
+            DisplayTable();
+            
+
+        }catch(SQLException e){}
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       addframe.setVisible(true);
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        addframe.dispose();
+        adfr.setText("");
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try{
+            String fl2=adfr.getText();
+            
+            String sqll="SELECT fullname FROM licenta.login  WHERE id ='"+addid+"'";
+            ps5 =connection.prepareStatement(sqll);
+            rs3 = ps5.executeQuery();
+            String fl=null;  
+            if(rs3.next()){
+              fl=rs3.getString("fullname");}
+
+               
+            if( fl2.equals(fl)){
+                  JOptionPane.showMessageDialog(null,"Eroare: Nu puteti sa va adaugati in lista dumneavoastra de prieteni");       
+              }else{
+                String sqlt="INSERT INTO `licenta`.`friends` (`fullname`, `id_user`) VALUES (?,'"+addid+"');";
+                ps4 =connection.prepareStatement(sqlt);
+                ps4.setString(1,adfr.getText());
+                ps4.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Prietenul a fost adaugat");
+                DisplayTable();
+                    
+            
+
+            }}catch(SQLException e){JOptionPane.showMessageDialog(null,"Eroare: Nu puteti adauga aceasta persoana ");}
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void adfrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adfrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adfrActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       try{
+            int row=t2.getSelectedRow();
+            nm_fr=t2.getModel().getValueAt(row,0).toString();
+            dispose();
+            FriendRecipes friendr=new FriendRecipes();
+            friendr.setVisible(true);
+       }catch (SQLException ex) {
+            Logger.getLogger(DisplayFriends.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,15 +356,14 @@ public class DisplayFriends  extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -223,6 +376,8 @@ public class DisplayFriends  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame addframe;
+    private javax.swing.JTextField adfr;
     private javax.swing.JLabel flname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -230,6 +385,8 @@ public class DisplayFriends  extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

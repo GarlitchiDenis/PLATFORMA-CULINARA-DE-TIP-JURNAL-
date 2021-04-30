@@ -136,9 +136,13 @@ public class HOME extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-        DisplayFriends p=new DisplayFriends();
-        p.setVisible(true);
+        try {
+            dispose();
+            DisplayFriends p=new DisplayFriends();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(HOME.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

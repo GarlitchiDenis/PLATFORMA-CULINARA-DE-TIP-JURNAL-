@@ -169,7 +169,6 @@ public class EditRec  extends javax.swing.JFrame {
         mpre = new java.awt.TextArea();
         lbi = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        aa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -325,9 +324,6 @@ public class EditRec  extends javax.swing.JFrame {
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
 
-        aa.setText("jLabel8");
-        jPanel1.add(aa, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 390, 70, 50));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
@@ -352,9 +348,13 @@ public class EditRec  extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-        DisplayFriends p=new DisplayFriends();
-        p.setVisible(true);
+        try {
+            dispose();
+            DisplayFriends p=new DisplayFriends();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -558,7 +558,6 @@ public class EditRec  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel aa;
     private javax.swing.JCheckBox car;
     private javax.swing.JCheckBox cer;
     private javax.swing.JLabel flname;

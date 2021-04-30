@@ -28,9 +28,9 @@ public class MyRecipes  extends javax.swing.JFrame {
     private int count=0;
     static Connection connection = null;
     PreparedStatement pst = null;
-   PreparedStatement ps = null;
-   PreparedStatement ps2 = null;
-   PreparedStatement prs= null;
+    PreparedStatement ps = null;
+    PreparedStatement ps2 = null;
+    PreparedStatement prs= null;
     ResultSet rs = null;
     ResultSet rs2 = null;
     ResultSet res = null;
@@ -66,20 +66,6 @@ public class MyRecipes  extends javax.swing.JFrame {
     private void DisplayTable() throws SQLException{
     try{   
            
-        
-          /*
-           String sqlt="SELECT * FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND  `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  )  AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  ) AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  ) AND  `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec  ) and `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id=21 AND t2.id_rec=t1.id_rec  ) AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec)";
-           connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
-					ps2 =connection.prepareStatement(sqlt);
-                                        rs2 = ps2.executeQuery();
-                                        if(rs2.next()){
-                                                l=Integer.parseInt(rs2.getString("dairy_products"));
-                                                cr=Integer.parseInt(rs2.getString("meat"));
-                                                o=Integer.parseInt(rs2.getString("egg"));
-                                                fr=Integer.parseInt(rs2.getString("fruit"));
-                                                le=Integer.parseInt(rs2.getString("vegetables"));
-                                                ce=Integer.parseInt(rs2.getString("cereals"));}
-                                        */
            
            
            connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000"); 
@@ -90,22 +76,7 @@ public class MyRecipes  extends javax.swing.JFrame {
             if(rs.next()){
             addid=rs.getString("id");}
             if(lac.isSelected() || car.isSelected() || ou.isSelected()|| fruc.isSelected() || leg.isSelected() || cer.isSelected()){
-               // sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND  `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `dairy_products`='"+l+"' )  AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `meat`='"+cr+"'  ) AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `egg`='"+o+"'  ) AND  `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `fruit`='"+fr+"'  ) and `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id=21 AND t2.id_rec=t1.id_rec AND `vegetables`='"+le+"'  ) AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `cereals`='"+ce+"')";
-                 // sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `dairy_products`='"+l+"'  AND IF('"+l+"'=1, `dairy_products`=1, `dairy_products`=`dairy_products`)) AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `meat`='"+cr+"' AND IF(`meat`='"+cr+"', `meat`=1, `meat`=`meat`)) AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `egg`='"+o+"' AND IF('"+o+"'=1, `egg`=1, `egg`=`egg`)) AND `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `fruit`='"+fr+"' AND IF('"+fr+"'=1, `fruit`=1, `fruit`=`fruit`)) AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `cereals`='"+ce+"' AND IF('"+ce+"'=1, `cereals`=1, `cereals`=`cereals`))  AND  `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `vegetables`='"+le+"' AND IF('"+le+"'=1, `vegetables`=1, `vegetables`=`vegetables`)  )";
-              // sql="SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `dairy_products`=(SELECT `dairy_products` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `dairy_products`='"+l+"' AND IF(`dairy_products`=1, `dairy_products`=1, `dairy_products`=`dairy_products`)) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `meat`=(SELECT `meat` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `meat`='"+cr+"' AND IF(`meat`=1, `meat`=1, `meat`=`meat`)  ) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `egg`=(SELECT `egg` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `egg`='"+o+"' AND IF(`egg`=1, `egg`=1, `egg`=`egg`)  ) UNION SELECT * FROM licenta.recipesas t1 WHERE id ='"+addid+"' AND  `fruit`=(SELECT `fruit` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `fruit`='"+fr+"' AND IF(`fruit`=1, `fruit`=1, `fruit`=`fruit`)) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `vegetables`=(SELECT `vegetables` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `vegetables`='"+le+"' AND IF(`vegetables`=1, `vegetables`=1, `vegetables`=`vegetables`)  ) UNION SELECT * FROM licenta.recipes as t1 WHERE id ='"+addid+"' AND  `cereals`=(SELECT `cereals` FROM licenta.recipes as t2 WHERE id='"+addid+"' AND t2.id_rec=t1.id_rec AND `cereals`='"+ce+"' AND IF(`cereals`=1, `cereals`=1, `cereals`=`cereals`))"; 
-               //sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `dairy_products`='"+l+"' AND IF(`dairy_products`=1, `dairy_products`=1, `dairy_products`=`dairy_products`) UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `meat`='"+cr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `egg`='"+o+"' AND IF(`egg`=1, `egg`=1, `egg`=`egg`) UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `fruit`='"+fr+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `vegetables`='"+le+"' UNION SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  `cereals`='"+ce+"'";  
-                sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";
-           l1.setText(String.valueOf(l));
-           l2.setText(String.valueOf(cr));
-           l3.setText(String.valueOf(o));
-           l4.setText(String.valueOf(fr));
-           l5.setText(String.valueOf(le));
-           l6.setText(String.valueOf(ce));
-
-// sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes as t1 WHERE `id` ='"+addid+"' AND  `dairy_products`= '"+l+"' AND IF(`dairy_products`=1, `dairy_products`=1, `dairy_products`=`dairy_products`)";
-              // SELECT * FROM licenta.recipes where vegetables=1 or  IF(vegetables=1, vegetables=1, vegetables=vegetables)
-
-
+             sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";       
              
              ps2 =connection.prepareStatement(sql);
                                               rs2 = ps2.executeQuery();  
@@ -165,12 +136,6 @@ public class MyRecipes  extends javax.swing.JFrame {
         ou = new javax.swing.JCheckBox();
         fruc = new javax.swing.JCheckBox();
         leg = new javax.swing.JCheckBox();
-        l6 = new javax.swing.JLabel();
-        l1 = new javax.swing.JLabel();
-        l2 = new javax.swing.JLabel();
-        l3 = new javax.swing.JLabel();
-        l4 = new javax.swing.JLabel();
-        l5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -342,80 +307,147 @@ public class MyRecipes  extends javax.swing.JFrame {
         });
         jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
 
-        l6.setText("jLabel9");
-        jPanel1.add(l6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 270, -1, -1));
-
-        l1.setText("jLabel9");
-        jPanel1.add(l1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, -1, -1));
-
-        l2.setText("jLabel9");
-        jPanel1.add(l2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 110, -1, -1));
-
-        l3.setText("jLabel9");
-        jPanel1.add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 150, -1, -1));
-
-        l4.setText("jLabel9");
-        jPanel1.add(l4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 190, -1, -1));
-
-        l5.setText("jLabel9");
-        jPanel1.add(l5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 230, -1, -1));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void opmenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_opmenMouseClicked
-   
-        count++;
-        if ( count % 2 == 0 ){  
-         menu.hide();
+    private void legActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_legActionPerformed
+        cc5++;
+        if(cc5%2==0){
+            leg.setSelected(false);
+            le=0;
+
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else{
-         menu.show();    
-        }       
-    
-    }//GEN-LAST:event_opmenMouseClicked
+            leg.setSelected(true);
+            le=1;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_legActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
-        Login log= new Login();
-        log.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void frucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frucActionPerformed
+        cc4++;
+        if(cc4%2==0){
+            fruc.setSelected(false);
+            fr=0;
 
-    private void opmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opmenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_opmenActionPerformed
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            fruc.setSelected(true);
+            fr=1;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_frucActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-        DisplayFriends p=new DisplayFriends();
-        p.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void ouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ouActionPerformed
+        cc3++;
+        if(cc3%2==0){
+            ou.setSelected(false);
+            o=0;
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            ou.setSelected(true);
+            o=1;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_ouActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      dispose();
-      CreateRec c= new CreateRec();
-      c.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void carActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carActionPerformed
+        cc2++;
+        if(cc2%2==0){
+            car.setSelected(false);
+            cr=0;
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int row=t1.getSelectedRow();
-        String n_rec=t1.getModel().getValueAt(row,0).toString();
-        try{
-        String qur="DELETE FROM `licenta`.`recipes` WHERE name='"+n_rec+"'";
-        prs =connection.prepareStatement(qur);
-        prs.executeUpdate();
-        JOptionPane.showMessageDialog(null,"Reteta a fost stearsa cu succes");
-        DisplayTable();
-        
-            
-        }catch(SQLException e){}
-    }//GEN-LAST:event_jButton5ActionPerformed
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            car.setSelected(true);
+            cr=1;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_carActionPerformed
+
+    private void lacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lacActionPerformed
+
+        cc1++;
+        if(cc1%2==0){
+            lac.setSelected(false);
+            l=0;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            lac.setSelected(true);
+            l=1;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lacActionPerformed
+
+    private void cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerActionPerformed
+        cc6++;
+        if(cc6%2==0){
+            cer.setSelected(false);
+             ce =0 ;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            cer.setSelected(true);
+            ce=1;
+            try {
+                DisplayTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cerActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try {
@@ -427,11 +459,13 @@ public class MyRecipes  extends javax.swing.JFrame {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
+            int row=t1.getSelectedRow();
+            nm_rec=t1.getModel().getValueAt(row,0).toString();
             dispose();
             DisplayRec ed=new DisplayRec();
             ed.setVisible(true);
@@ -440,142 +474,60 @@ public class MyRecipes  extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void lacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lacActionPerformed
-        
-                cc1++;
-                if(cc1%2==0){
-                lac.setSelected(false);
-                l=0;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-                else{
-                lac.setSelected(true);
-                l=1;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-    }//GEN-LAST:event_lacActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int row=t1.getSelectedRow();
+        String n_rec=t1.getModel().getValueAt(row,0).toString();
+        try{
+            String qur="DELETE FROM `licenta`.`recipes` WHERE name='"+n_rec+"'";
+            prs =connection.prepareStatement(qur);
+            prs.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Reteta a fost stearsa cu succes");
+            DisplayTable();
 
-    private void carActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carActionPerformed
-                cc2++;
-                if(cc2%2==0){
-                   car.setSelected(false);
-                   cr=0;
-                   
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-                else{
-                    car.setSelected(true);
-                    cr=1;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-    }//GEN-LAST:event_carActionPerformed
+        }catch(SQLException e){}
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void ouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ouActionPerformed
-                cc3++;
-                if(cc3%2==0){
-                   ou.setSelected(false);
-                   o=0;
-                   
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-                else{
-                    ou.setSelected(true);
-                    o=1;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-    }//GEN-LAST:event_ouActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
+        CreateRec c= new CreateRec();
+        c.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void frucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frucActionPerformed
-                cc4++;
-                if(cc4%2==0){
-                    fruc.setSelected(false);
-                    fr=0;
-                    
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-                else{
-                    fruc.setSelected(true);
-                    fr=1;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-    }//GEN-LAST:event_frucActionPerformed
+    private void opmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opmenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opmenActionPerformed
 
-    private void legActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_legActionPerformed
-                cc5++;
-                if(cc5%2==0){
-                    leg.setSelected(false);
-                    le=0;
-                    
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-                else{
-                    leg.setSelected(true);
-                    le=1;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-    }//GEN-LAST:event_legActionPerformed
+    private void opmenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_opmenMouseClicked
 
-    private void cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerActionPerformed
-                cc6++;
-                if(cc6%2==0){
-                    cer.setSelected(false);  
-                    int ce =0 ;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-                else{
-                    cer.setSelected(true);
-                    ce=1;
-                    try {
-                        DisplayTable();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-}
-    }//GEN-LAST:event_cerActionPerformed
+        count++;
+        if ( count % 2 == 0 ){
+            menu.hide();
+        }
+        else{
+            menu.show();
+        }
+
+    }//GEN-LAST:event_opmenMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            dispose();
+            DisplayFriends p=new DisplayFriends();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+        Login log= new Login();
+        log.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -634,12 +586,6 @@ public class MyRecipes  extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel l1;
-    private javax.swing.JLabel l2;
-    private javax.swing.JLabel l3;
-    private javax.swing.JLabel l4;
-    private javax.swing.JLabel l5;
-    private javax.swing.JLabel l6;
     private javax.swing.JCheckBox lac;
     private javax.swing.JCheckBox leg;
     private javax.swing.JPanel menu;
