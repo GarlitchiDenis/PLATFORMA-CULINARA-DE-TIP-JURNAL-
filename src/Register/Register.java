@@ -11,7 +11,9 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +24,11 @@ public class Register extends javax.swing.JFrame {
 
     static Connection connection = null;
     PreparedStatement pst = null;
-
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    static String vus=null;
+    static String vfn=null;
+    static String vem=null;
     /**
      * Creates new form Register
      */
@@ -33,7 +39,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     public final void Seticon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("diary.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
 
     /**
@@ -58,10 +64,10 @@ public class Register extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         cpsw = new javax.swing.JPasswordField();
         psw = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TastyDiary");
@@ -130,6 +136,15 @@ public class Register extends javax.swing.JFrame {
         jButton1.getAccessibleContext().setAccessibleName("registry");
         jButton1.getAccessibleContext().setAccessibleDescription("");
 
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\backk.png")); // NOI18N
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 70, 60));
+
         cpsw.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         cpsw.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanel1.add(cpsw, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 230, 40));
@@ -148,17 +163,7 @@ public class Register extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 550));
         jLabel2.getAccessibleContext().setAccessibleName("REGISTER");
 
-        back.setBackground(new java.awt.Color(255, 255, 255));
-        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        back.setOpaque(false);
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 40, 30));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -171,17 +176,51 @@ public class Register extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             String sqlt = "INSERT INTO `licenta`.`login` (`username`, `password`, `email`, `gender`,`fullname`) VALUES (?,?,?,?,?);";
+            String query="SELECT * FROM licenta.login ";  
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root", "000000");
+            ps =connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                vus = rs.getString("username");
+                vfn = rs.getString("fullname");
+                vem = rs.getString("email");
+}
             pst = connection.prepareStatement(sqlt);
             pst.setString(1, usr.getText());
             pst.setString(2, psw.getText());
             pst.setString(3, email.getText());
             pst.setString(4, gen.getSelectedItem().toString());
             pst.setString(5, fname.getText());
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Register SUCCESSFULY");
-        } catch (HeadlessException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Eror");
+            if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email.getText()))) {
+                 JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);}
+            else if((email.getText().equals(vem))){
+                         JOptionPane.showMessageDialog(null, "This email address is already being used", "Error", JOptionPane.ERROR_MESSAGE);
+                         }
+            
+            else if(psw.getText().length()<6 || psw.getText().length()>=30 ) {
+                 JOptionPane.showMessageDialog(null, "Your password must be between 5 and 30 characte", "Error", JOptionPane.ERROR_MESSAGE);}
+            
+            else if((fname.getText().equals(vfn))){
+                         JOptionPane.showMessageDialog(null, "This full name is already being used", "Error", JOptionPane.ERROR_MESSAGE);
+                         }
+           
+            else if(usr.getText().length()<6  || usr.getText().length()>=30 ) {
+                JOptionPane.showMessageDialog(null, "Your username must be between 5 and 30 charactel", "Error", JOptionPane.ERROR_MESSAGE);}
+            else if((email.getText().equals(vem))){
+                         JOptionPane.showMessageDialog(null, "This username is already being used", "Error", JOptionPane.ERROR_MESSAGE);
+                         }
+            else  if(!(psw.getText().equals(cpsw.getText()))){
+                         JOptionPane.showMessageDialog(null, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                         }
+            
+            else{
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Register Successfuly");
+                dispose();
+                 Login lg = new Login();
+                lg.setVisible(true);
+        }} catch (HeadlessException | SQLException ex) {
+               
         }
 
 
@@ -191,11 +230,11 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pswActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        dispose();
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+       dispose();
         Login lg = new Login();
         lg.setVisible(true);
-    }//GEN-LAST:event_backActionPerformed
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -227,7 +266,6 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back;
     private javax.swing.JPasswordField cpsw;
     private javax.swing.JTextField email;
     private javax.swing.JTextField fname;
@@ -240,6 +278,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField psw;
     private javax.swing.JTextField usr;

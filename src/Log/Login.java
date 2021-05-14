@@ -6,12 +6,21 @@ import Register.Register;
 import password.ForgotPassword;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static jdk.nashorn.tools.ShellFunctions.input;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,12 +36,29 @@ public class Login extends javax.swing.JFrame {
     static Connection connection = null;
 	PreparedStatement pst = null;
 	ResultSet rs = null;
-
-    /**
+       
+        
+        /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        rememe();
+ 
+    }
+    public final  void rememe() {
+       File file=new File("C:\\Users\\garli\\OneDrive\\Desktop\\TastyDiary\\rememberme.txt");
+        try {
+            Scanner scan=new Scanner(file);   
+            while(scan.hasNext()){
+                String num=scan.nextLine();
+                luser.setText(num);}
+           
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        
     }
 
     /**
@@ -164,6 +190,20 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_rememberActionPerformed
 
     private void blog1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blog1ActionPerformed
+        
+      if(remember.isSelected()){
+           String string=luser.getText();
+            try {
+                BufferedWriter writer= new BufferedWriter(new FileWriter("C:\\Users\\garli\\OneDrive\\Desktop\\TastyDiary\\rememberme.txt"));
+                writer.write(string);
+                writer.close();
+                        
+                        } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        
+    } else{JOptionPane.showMessageDialog(null, "eroare");}
         
         try {
 					String sql = "SELECT * FROM licenta.login WHERE username =? and password =? ";

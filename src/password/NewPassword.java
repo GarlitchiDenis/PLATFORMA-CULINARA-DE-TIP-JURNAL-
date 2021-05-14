@@ -6,6 +6,7 @@
 package password;
 
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,6 +30,7 @@ public class NewPassword extends javax.swing.JFrame {
      */
     public NewPassword() {
         initComponents();
+        Seticon();
     }
 public NewPassword(String vemail){
     initComponents();
@@ -37,7 +39,9 @@ public NewPassword(String vemail){
     
 }
 
-        
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
+    }     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,16 +51,19 @@ public NewPassword(String vemail){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
+        jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         respsw = new javax.swing.JPasswordField();
         crespsw = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,6 +72,7 @@ public NewPassword(String vemail){
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("RESET");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -93,22 +101,22 @@ public NewPassword(String vemail){
         crespsw.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanel1.add(crespsw, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 380, 40));
 
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\backk.png")); // NOI18N
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 70, 50));
+
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\newpass.jpg")); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 460));
 
-        back.setBackground(new java.awt.Color(255, 255, 255));
-        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        back.setOpaque(false);
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 30, 20));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 460));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 460));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -133,15 +141,15 @@ public NewPassword(String vemail){
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        dispose();
-        ForgotPassword fp= new ForgotPassword();
-        fp.setVisible(true);
-    }//GEN-LAST:event_backActionPerformed
-
     private void respswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respswActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_respswActionPerformed
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        dispose();
+        ForgotPassword fp= new ForgotPassword();
+        fp.setVisible(true);
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,12 +181,12 @@ public NewPassword(String vemail){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back;
     private javax.swing.JPasswordField crespsw;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField respsw;
     // End of variables declaration//GEN-END:variables

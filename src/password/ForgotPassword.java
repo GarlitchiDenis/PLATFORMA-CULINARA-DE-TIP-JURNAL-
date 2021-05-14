@@ -1,6 +1,7 @@
 package password;
 
 import Log.Login;
+import java.awt.Toolkit;
 import java.util.Properties;
 import java.util.Random;
 import javax.mail.Message.RecipientType;
@@ -27,6 +28,11 @@ public class ForgotPassword extends javax.swing.JFrame {
     public ForgotPassword() {
 
         initComponents();
+        Seticon();
+    }
+    
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
 
     /**
@@ -38,6 +44,8 @@ public class ForgotPassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
+        jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         buton1 = new javax.swing.JButton();
         vemail = new javax.swing.JTextField();
@@ -45,10 +53,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         vcode = new javax.swing.JTextField();
         buton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         setMinimumSize(new java.awt.Dimension(776, 510));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -60,12 +69,13 @@ public class ForgotPassword extends javax.swing.JFrame {
         buton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         buton1.setText("SEND");
         buton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(buton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 160, 40));
+        jPanel1.add(buton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 160, 40));
 
         vemail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         vemail.addActionListener(new java.awt.event.ActionListener() {
@@ -73,46 +83,47 @@ public class ForgotPassword extends javax.swing.JFrame {
                 vemailActionPerformed(evt);
             }
         });
-        jPanel1.add(vemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 300, 40));
+        jPanel1.add(vemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 300, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("CODE");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 130, 60));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 130, 60));
 
         vcode.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.add(vcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 300, 40));
+        jPanel1.add(vcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 300, 40));
 
         buton2.setBackground(new java.awt.Color(255, 230, 208));
         buton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         buton2.setText("VERIFY");
         buton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(buton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 160, 40));
+        jPanel1.add(buton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 160, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Email");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 130, 60));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 130, 60));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\backk.png")); // NOI18N
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 70, 50));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\FPASS.jpg")); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 810, 520));
 
-        back.setBackground(new java.awt.Color(255, 255, 255));
-        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        back.setOpaque(false);
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 40, 30));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, -1, 470));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buton1ActionPerformed
@@ -163,10 +174,10 @@ public class ForgotPassword extends javax.swing.JFrame {
             transport.connect(HOST, USER, PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-            JOptionPane.showMessageDialog(null, "Code send");
+            JOptionPane.showMessageDialog(null, "Code sent");
  
         } catch (MessagingException e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, "Invalid Email Address", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_buton1ActionPerformed
@@ -187,11 +198,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_vemailActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         dispose();
-        Login lg= new Login();
+        Login lg = new Login();
         lg.setVisible(true);
-    }//GEN-LAST:event_backActionPerformed
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -209,15 +220,11 @@ public class ForgotPassword extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -227,12 +234,12 @@ public class ForgotPassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back;
     private javax.swing.JButton buton1;
     private javax.swing.JButton buton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField vcode;
     private javax.swing.JTextField vemail;
