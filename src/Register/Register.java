@@ -29,6 +29,7 @@ public class Register extends javax.swing.JFrame {
     static String vus=null;
     static String vfn=null;
     static String vem=null;
+    static String vpsw=null;
     /**
      * Creates new form Register
      */
@@ -42,6 +43,30 @@ public class Register extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
 
+    public static StringBuffer encrypt(String text, int s)
+    {
+        StringBuffer result= new StringBuffer();
+ 
+        for (int i=0; i<text.length(); i++)
+        {
+            if (Character.isUpperCase(text.charAt(i)))
+            {
+                char ch = (char)(((int)text.charAt(i) +
+                                  s - 65) % 26 + 65);
+                result.append(ch);
+            }
+            else
+            {
+                char ch = (char)(((int)text.charAt(i) +
+                                  s - 97) % 26 + 97);
+                result.append(ch);
+            }
+        }
+        return result;
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,6 +93,7 @@ public class Register extends javax.swing.JFrame {
         cpsw = new javax.swing.JPasswordField();
         psw = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        pswEncrypt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TastyDiary");
@@ -163,6 +189,9 @@ public class Register extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 550));
         jLabel2.getAccessibleContext().setAccessibleName("REGISTER");
 
+        pswEncrypt.setText("jLabel9");
+        jPanel1.add(pswEncrypt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 100, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, -1));
 
         pack();
@@ -174,6 +203,8 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_fnameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        
         try {
             String sqlt = "INSERT INTO `licenta`.`login` (`username`, `password`, `email`, `gender`,`fullname`) VALUES (?,?,?,?,?);";
             String query="SELECT * FROM licenta.login ";  
@@ -185,10 +216,15 @@ public class Register extends javax.swing.JFrame {
                 vfn = rs.getString("fullname");
                 vem = rs.getString("email");
 }
+            vpsw = psw.getText();
+             int s=3;
+            StringBuffer pp = encrypt(vpsw, s);     
+            pswEncrypt.setText(pp.toString());            
             pst = connection.prepareStatement(sqlt);
             pst.setString(1, usr.getText());
-            pst.setString(2, psw.getText());
+            pst.setString(2,pswEncrypt.getText());
             pst.setString(3, email.getText());
+
             pst.setString(4, gen.getSelectedItem().toString());
             pst.setString(5, fname.getText());
             if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email.getText()))) {
@@ -281,6 +317,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField psw;
+    private javax.swing.JLabel pswEncrypt;
     private javax.swing.JTextField usr;
     // End of variables declaration//GEN-END:variables
 }

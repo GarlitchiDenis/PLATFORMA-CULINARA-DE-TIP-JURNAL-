@@ -366,7 +366,6 @@ public class CreateRec  extends javax.swing.JFrame {
                                         Logger.getLogger(CreateRec.class.getName()).log(Level.SEVERE, null, ex);
                                     }}
                                     if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
-                                      // pst.executeUpdate();
 					JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
 				}catch(HeadlessException | SQLException ex) {
 					JOptionPane.showMessageDialog(null,"Eror");

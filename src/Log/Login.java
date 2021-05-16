@@ -6,6 +6,7 @@ import Register.Register;
 import password.ForgotPassword;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +21,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static jdk.nashorn.tools.ShellFunctions.input;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,6 +36,7 @@ public class Login extends javax.swing.JFrame {
     static Connection connection = null;
 	PreparedStatement pst = null;
 	ResultSet rs = null;
+        static String vps=null;
        
         
         /**
@@ -44,8 +45,37 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         rememe();
+        Seticon();
  
     }
+    
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
+    }
+    
+    
+    public static StringBuffer encrypt(String text, int s)
+    {
+        StringBuffer result= new StringBuffer();
+ 
+        for (int i=0; i<text.length(); i++)
+        {
+            if (Character.isUpperCase(text.charAt(i)))
+            {
+                char ch = (char)(((int)text.charAt(i) +
+                                  s - 65) % 26 + 65);
+                result.append(ch);
+            }
+            else
+            {
+                char ch = (char)(((int)text.charAt(i) +
+                                  s - 97) % 26 + 97);
+                result.append(ch);
+            }
+        }
+        return result;
+    }
+    
     public final  void rememe() {
        File file=new File("C:\\Users\\garli\\OneDrive\\Desktop\\TastyDiary\\rememberme.txt");
         try {
@@ -70,6 +100,8 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
+        jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         breg = new javax.swing.JButton();
         blog1 = new javax.swing.JButton();
@@ -81,8 +113,10 @@ public class Login extends javax.swing.JFrame {
         lpass = new javax.swing.JPasswordField();
         remember = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
+        pswEncrypt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(205, 92, 92));
@@ -165,6 +199,9 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\log bunaur.jpg")); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -10, 1110, 680));
 
+        pswEncrypt.setText("jLabel3");
+        jPanel1.add(pswEncrypt, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 1120, 660));
         jPanel1.getAccessibleContext().setAccessibleName("");
 
@@ -203,14 +240,18 @@ public class Login extends javax.swing.JFrame {
             }
            
         
-    } else{JOptionPane.showMessageDialog(null, "eroare");}
+    } 
         
         try {
 					String sql = "SELECT * FROM licenta.login WHERE username =? and password =? ";
 					connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
 					pst = connection.prepareStatement(sql);
-					pst.setString(1, luser.getText());
-					pst.setString(2, lpass.getText());
+					vps = lpass.getText();
+                                        int s=3;
+                                        StringBuffer pp = encrypt(vps, s);                                              
+                                        pswEncrypt.setText(pp.toString());            
+                                        pst.setString(1, luser.getText());
+					pst.setString(2, pswEncrypt.getText());
 					rs = pst.executeQuery();
 					if (rs.next()) {			
 							String fullname = rs.getString("fullname");
@@ -292,6 +333,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField lpass;
     private javax.swing.JTextField luser;
+    private javax.swing.JLabel pswEncrypt;
     private javax.swing.JCheckBox remember;
     // End of variables declaration//GEN-END:variables
 

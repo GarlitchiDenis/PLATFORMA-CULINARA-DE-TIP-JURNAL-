@@ -5,6 +5,7 @@
  */
 package password;
 
+import Log.Login;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -35,13 +36,37 @@ public class NewPassword extends javax.swing.JFrame {
 public NewPassword(String vemail){
     initComponents();
     this.user=vemail;
+    Seticon();
    
     
 }
+ public static StringBuffer encrypt(String text, int s)
+    {
+        StringBuffer result= new StringBuffer();
+ 
+        for (int i=0; i<text.length(); i++)
+        {
+            if (Character.isUpperCase(text.charAt(i)))
+            {
+                char ch = (char)(((int)text.charAt(i) +
+                                  s - 65) % 26 + 65);
+                result.append(ch);
+            }
+            else
+            {
+                char ch = (char)(((int)text.charAt(i) +
+                                  s - 97) % 26 + 97);
+                result.append(ch);
+            }
+        }
+        return result;
+    }
+
+
 
     public final void Seticon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
-    }     
+    }   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,6 +86,7 @@ public NewPassword(String vemail){
         crespsw = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        pswEncrypt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TastyDiary");
@@ -113,6 +139,9 @@ public NewPassword(String vemail){
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\newpass.jpg")); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 460));
 
+        pswEncrypt.setText("jLabel4");
+        jPanel1.add(pswEncrypt, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 460));
 
         pack();
@@ -123,13 +152,24 @@ public NewPassword(String vemail){
       
         if(respsw.getText() == null ? crespsw.getText() == null : respsw.getText().equals(crespsw.getText())){
             try{
-                String updateQuery="UPDATE `licenta`.`login` SET `password` = ? WHERE email=?";
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
-		pst = con.prepareStatement(updateQuery);
-                 pst.setString(1, respsw.getText());
-                 pst.setString(2, user);
-                pst.executeUpdate();
-                JOptionPane.showMessageDialog(null,"Reset Successfully");
+                    String updateQuery="UPDATE `licenta`.`login` SET `password` = ? WHERE email=?";
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+                    pst = con.prepareStatement(updateQuery);
+                    String vpsw = respsw.getText();
+                    int s=3;
+                    StringBuffer pp = encrypt(vpsw, s);     
+                    pswEncrypt.setText(pp.toString());
+                    
+                    pst.setString(1, pswEncrypt.getText());
+                    pst.setString(2, user);
+                 if(respsw.getText().length()<6 || respsw.getText().length()>=30 ) {
+                 JOptionPane.showMessageDialog(null, "Your password must be between 5 and 30 characte", "Error", JOptionPane.ERROR_MESSAGE);}
+                 if(respsw.getText().length()>5 && respsw.getText().length()<30 ) {        
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(null,"Reset Successfully");
+                    dispose();
+                    Login lgc= new Login();
+                    lgc.setVisible(true);}
             }catch(HeadlessException | SQLException e){
                  JOptionPane.showMessageDialog(null,e);
             }
@@ -188,6 +228,7 @@ public NewPassword(String vemail){
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel pswEncrypt;
     private javax.swing.JPasswordField respsw;
     // End of variables declaration//GEN-END:variables
 }
