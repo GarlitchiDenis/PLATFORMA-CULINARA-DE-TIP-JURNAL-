@@ -1,6 +1,7 @@
 package password;
 
 import Log.Login;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.Properties;
 import java.util.Random;
@@ -47,11 +48,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         setResizable(false);
         jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        buton1 = new javax.swing.JButton();
+        bbsnd = new javax.swing.JButton();
         vemail = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         vcode = new javax.swing.JTextField();
-        buton2 = new javax.swing.JButton();
+        bver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -65,17 +66,25 @@ public class ForgotPassword extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(776, 510));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buton1.setBackground(new java.awt.Color(255, 230, 208));
-        buton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        buton1.setText("SEND");
-        buton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buton1ActionPerformed(evt);
+        bbsnd.setBackground(new java.awt.Color(255, 230, 208));
+        bbsnd.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        bbsnd.setText("SEND");
+        bbsnd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bbsnd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bbsnd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bbsndMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bbsndMouseExited(evt);
             }
         });
-        jPanel1.add(buton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 160, 40));
+        bbsnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bbsndActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bbsnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 160, 40));
 
         vemail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         vemail.addActionListener(new java.awt.event.ActionListener() {
@@ -92,17 +101,25 @@ public class ForgotPassword extends javax.swing.JFrame {
         vcode.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.add(vcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 300, 40));
 
-        buton2.setBackground(new java.awt.Color(255, 230, 208));
-        buton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        buton2.setText("VERIFY");
-        buton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buton2ActionPerformed(evt);
+        bver.setBackground(new java.awt.Color(255, 230, 208));
+        bver.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        bver.setText("VERIFY");
+        bver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bverMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bverMouseExited(evt);
             }
         });
-        jPanel1.add(buton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 160, 40));
+        bver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bver, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 160, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Email");
@@ -126,7 +143,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buton1ActionPerformed
+    private void bbsndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbsndActionPerformed
         Random rand = new Random();
         randomCode = rand.nextInt(999999);
         String HOST = "smtp.gmail.com";
@@ -180,9 +197,9 @@ public class ForgotPassword extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Invalid Email Address", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-    }//GEN-LAST:event_buton1ActionPerformed
+    }//GEN-LAST:event_bbsndActionPerformed
 
-    private void buton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buton2ActionPerformed
+    private void bverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bverActionPerformed
         if(Integer.valueOf(vcode.getText())==randomCode){
              dispose();
              NewPassword np= new NewPassword(vemail.getText());
@@ -192,7 +209,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         }
     
 
-    }//GEN-LAST:event_buton2ActionPerformed
+    }//GEN-LAST:event_bverActionPerformed
 
     private void vemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vemailActionPerformed
         // TODO add your handling code here:
@@ -203,6 +220,24 @@ public class ForgotPassword extends javax.swing.JFrame {
         Login lg = new Login();
         lg.setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void bbsndMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bbsndMouseEntered
+        bbsnd.setBackground(Color.GRAY);
+                                   
+    }//GEN-LAST:event_bbsndMouseEntered
+
+    private void bbsndMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bbsndMouseExited
+        bbsnd.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bbsndMouseExited
+
+    private void bverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bverMouseEntered
+       bver.setBackground(Color.GRAY);
+                                     
+    }//GEN-LAST:event_bverMouseEntered
+
+    private void bverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bverMouseExited
+        bver.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bverMouseExited
 
     /**
      * @param args the command line arguments
@@ -234,8 +269,8 @@ public class ForgotPassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buton1;
-    private javax.swing.JButton buton2;
+    private javax.swing.JButton bbsnd;
+    private javax.swing.JButton bver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

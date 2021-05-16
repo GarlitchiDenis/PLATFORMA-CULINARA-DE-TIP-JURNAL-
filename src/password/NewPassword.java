@@ -6,6 +6,7 @@
 package password;
 
 import Log.Login;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -79,7 +80,7 @@ public NewPassword(String vemail){
         setResizable(false);
         jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        breset = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         respsw = new javax.swing.JPasswordField();
@@ -94,17 +95,28 @@ public NewPassword(String vemail){
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 230, 208));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("RESET");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        breset.setBackground(new java.awt.Color(255, 230, 208));
+        breset.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        breset.setText("RESET");
+        breset.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        breset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        breset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bresetMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bresetMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bresetMousePressed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 128, 35));
+        breset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bresetActionPerformed(evt);
+            }
+        });
+        jPanel1.add(breset, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 128, 35));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("CONFIRM NEW PASSWORD");
@@ -148,7 +160,7 @@ public NewPassword(String vemail){
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bresetActionPerformed
       
         if(respsw.getText() == null ? crespsw.getText() == null : respsw.getText().equals(crespsw.getText())){
             try{
@@ -179,7 +191,7 @@ public NewPassword(String vemail){
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bresetActionPerformed
 
     private void respswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respswActionPerformed
         // TODO add your handling code here:
@@ -190,6 +202,18 @@ public NewPassword(String vemail){
         ForgotPassword fp= new ForgotPassword();
         fp.setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void bresetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bresetMouseEntered
+        breset.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bresetMouseEntered
+
+    private void bresetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bresetMouseExited
+        breset.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bresetMouseExited
+
+    private void bresetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bresetMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bresetMousePressed
 
     /**
      * @param args the command line arguments
@@ -221,8 +245,8 @@ public NewPassword(String vemail){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton breset;
     private javax.swing.JPasswordField crespsw;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

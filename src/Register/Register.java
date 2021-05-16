@@ -6,6 +6,7 @@
 package Register;
 
 import Log.Login;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -88,7 +89,7 @@ public class Register extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        breg = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         cpsw = new javax.swing.JPasswordField();
         psw = new javax.swing.JPasswordField();
@@ -148,19 +149,27 @@ public class Register extends javax.swing.JFrame {
         jLabel7.setText("EMAIL");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 90, 30));
 
-        jButton1.setBackground(new java.awt.Color(255, 230, 208));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton1.setText("REGISTER");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        breg.setBackground(new java.awt.Color(255, 230, 208));
+        breg.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        breg.setText("REGISTER");
+        breg.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        breg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        breg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bregMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bregMouseExited(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 240, 40));
-        jButton1.getAccessibleContext().setAccessibleName("registry");
-        jButton1.getAccessibleContext().setAccessibleDescription("");
+        breg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bregActionPerformed(evt);
+            }
+        });
+        jPanel1.add(breg, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 240, 40));
+        breg.getAccessibleContext().setAccessibleName("registry");
+        breg.getAccessibleContext().setAccessibleDescription("");
 
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\backk.png")); // NOI18N
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -202,7 +211,7 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fnameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bregActionPerformed
 
         
         try {
@@ -260,7 +269,7 @@ public class Register extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bregActionPerformed
 
     private void pswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswActionPerformed
         // TODO add your handling code here:
@@ -271,6 +280,14 @@ public class Register extends javax.swing.JFrame {
         Login lg = new Login();
         lg.setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void bregMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bregMouseEntered
+       breg.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bregMouseEntered
+
+    private void bregMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bregMouseExited
+       breg.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bregMouseExited
 
     /**
      * @param args the command line arguments
@@ -302,11 +319,11 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton breg;
     private javax.swing.JPasswordField cpsw;
     private javax.swing.JTextField email;
     private javax.swing.JTextField fname;
     private javax.swing.JComboBox<String> gen;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
