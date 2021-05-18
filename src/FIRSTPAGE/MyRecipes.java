@@ -8,6 +8,8 @@ package FIRSTPAGE;
 import static FIRSTPAGE.HOME.nmm;
 import Friends.DisplayFriends;
 import Log.Login;
+import java.awt.Color;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -61,8 +63,12 @@ public class MyRecipes  extends javax.swing.JFrame {
         initComponents();
         flname.setText(nmm); 
         DisplayTable();
+        Seticon();
     }
     
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
+    }
     private void DisplayTable() throws SQLException{
     try{   
            
@@ -76,7 +82,7 @@ public class MyRecipes  extends javax.swing.JFrame {
             if(rs.next()){
             addid=rs.getString("id");}
             if(lac.isSelected() || car.isSelected() || ou.isSelected()|| fruc.isSelected() || leg.isSelected() || cer.isSelected()){
-             sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";       
+             sql="SELECT name as NAME FROM licenta.recipes WHERE id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";       
              
              ps2 =connection.prepareStatement(sql);
                                               rs2 = ps2.executeQuery();  
@@ -87,7 +93,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                                                 fr=Integer.parseInt(res.getString("fruit"));
                                                 le=Integer.parseInt(res.getString("vegetables"));
                                                 ce=Integer.parseInt(res.getString("cereals"));}
-            }else{sql="SELECT name,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"'";}
+            }else{sql="SELECT name as NAME FROM licenta.recipes WHERE id ='"+addid+"'";}
             pst =connection.prepareStatement(sql);
             res = pst.executeQuery();
             t1.setModel(DbUtils.resultSetToTableModel(res));
@@ -109,21 +115,22 @@ public class MyRecipes  extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
+        jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         flname = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        blo = new javax.swing.JButton();
+        bf = new javax.swing.JButton();
+        bmr = new javax.swing.JButton();
         opmen = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bcr = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         t1 = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        bde = new javax.swing.JButton();
+        bop = new javax.swing.JButton();
+        bed = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -136,53 +143,83 @@ public class MyRecipes  extends javax.swing.JFrame {
         ou = new javax.swing.JCheckBox();
         fruc = new javax.swing.JCheckBox();
         leg = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(235, 236, 193));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menu.hide();
-        menu.setBackground(new java.awt.Color(204, 255, 204));
+        menu.setBackground(new java.awt.Color(228, 236, 193));
+        menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.darkGray, new java.awt.Color(0, 0, 0), java.awt.Color.darkGray, java.awt.Color.darkGray));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("retete");
-        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 90, 50));
 
         jLabel2.setBackground(new java.awt.Color(255, 230, 208));
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
         menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
-        flname.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        flname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         flname.setText("name");
-        menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
+        menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 100, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 230, 208));
-        jButton1.setText("Log Out");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        blo.setBackground(new java.awt.Color(255, 230, 208));
+        blo.setText("LOG OUT");
+        blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        blo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bloMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bloMouseExited(evt);
             }
         });
-        menu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
-
-        jButton2.setText("FRIENDS");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        blo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bloActionPerformed(evt);
             }
         });
-        menu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
-        jButton3.setText("MYRECIPES");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        bf.setBackground(new java.awt.Color(255, 230, 208));
+        bf.setText("FRIENDS");
+        bf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bfMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bfMouseExited(evt);
             }
         });
-        menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        bf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bfActionPerformed(evt);
+            }
+        });
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 480));
+        bmr.setBackground(new java.awt.Color(255, 230, 208));
+        bmr.setText("MYRECIPES");
+        bmr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bmr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bmrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bmrMouseExited(evt);
+            }
+        });
+        bmr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmrActionPerformed(evt);
+            }
+        });
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 390));
 
         opmen.setBackground(new java.awt.Color(255, 230, 208));
         opmen.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\menu (1).png")); // NOI18N
@@ -199,13 +236,23 @@ public class MyRecipes  extends javax.swing.JFrame {
         });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
-        jButton4.setText("CREATE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+        bcr.setBackground(new java.awt.Color(255, 230, 208));
+        bcr.setText("CREATE");
+        bcr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bcr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bcrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bcrMouseExited(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 480, -1, -1));
+        bcr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcrActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bcr, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
 
         t1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -218,59 +265,91 @@ public class MyRecipes  extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        t1.setSelectionForeground(new java.awt.Color(235, 236, 193));
+        t1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(t1);
         t1.getAccessibleContext().setAccessibleName("r");
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 101, 640, 370));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 310, 100));
 
-        jButton5.setText("DELETE");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+        bde.setBackground(new java.awt.Color(255, 230, 208));
+        bde.setText("DELETE");
+        bde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bde.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bdeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bdeMouseExited(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, -1, -1));
-
-        jButton6.setText("OPEN");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        bde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                bdeActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, -1, -1));
+        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, -1, -1));
 
-        jButton7.setText("EDIT");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+        bop.setBackground(new java.awt.Color(255, 230, 208));
+        bop.setText("OPEN");
+        bop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bopMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bopMouseExited(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, -1, -1));
+        bop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bopActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, -1));
 
-        jLabel3.setText("LAPTE");
+        bed.setBackground(new java.awt.Color(255, 230, 208));
+        bed.setText("EDIT");
+        bed.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bed.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bedMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bedMouseExited(evt);
+            }
+        });
+        bed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bedActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bed, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, -1, -1));
+
+        jLabel3.setText("DAIRIES");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, 20));
 
-        jLabel4.setText("CARNE");
+        jLabel4.setText("MEAT");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, 20));
 
-        jLabel5.setText("OUA");
+        jLabel5.setText("EGGS");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 20));
 
-        jLabel6.setText("FRUCTE");
+        jLabel6.setText("FRUITS");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, 20));
 
-        jLabel7.setText("LEGUME");
+        jLabel7.setText("VEGETABLES");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, 20));
 
-        jLabel8.setText("CEREALE");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, 20));
+        jLabel8.setText("CEREALS");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, -1, 20));
 
         cer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerActionPerformed(evt);
             }
         });
-        jPanel1.add(cer, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, -1, -1));
+        jPanel1.add(cer, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
 
         lac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,11 +384,15 @@ public class MyRecipes  extends javax.swing.JFrame {
                 legActionPerformed(evt);
             }
         });
-        jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
+        jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
+        jPanel2.setBackground(new java.awt.Color(228, 236, 193));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1100, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 430));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void legActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_legActionPerformed
@@ -449,7 +532,7 @@ public class MyRecipes  extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cerActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void bedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bedActionPerformed
         try {
             int row=t1.getSelectedRow();
             nm_rec=t1.getModel().getValueAt(row,0).toString();
@@ -460,9 +543,9 @@ public class MyRecipes  extends javax.swing.JFrame {
             Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_bedActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void bopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bopActionPerformed
         try {
             int row=t1.getSelectedRow();
             nm_rec=t1.getModel().getValueAt(row,0).toString();
@@ -472,9 +555,9 @@ public class MyRecipes  extends javax.swing.JFrame {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_bopActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void bdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdeActionPerformed
         int row=t1.getSelectedRow();
         String n_rec=t1.getModel().getValueAt(row,0).toString();
         try{
@@ -485,13 +568,13 @@ public class MyRecipes  extends javax.swing.JFrame {
             DisplayTable();
 
         }catch(SQLException e){}
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_bdeActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void bcrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcrActionPerformed
         dispose();
         CreateRec c= new CreateRec();
         c.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_bcrActionPerformed
 
     private void opmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opmenActionPerformed
         // TODO add your handling code here:
@@ -509,11 +592,11 @@ public class MyRecipes  extends javax.swing.JFrame {
 
     }//GEN-LAST:event_opmenMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bmrActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfActionPerformed
         try {
             dispose();
             DisplayFriends p=new DisplayFriends();
@@ -521,13 +604,74 @@ public class MyRecipes  extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(MyRecipes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bfActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloActionPerformed
         dispose();
         Login log= new Login();
         log.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bloActionPerformed
+
+    private void bmrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseEntered
+        bmr.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bmrMouseEntered
+
+    private void bmrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseExited
+        bmr.setBackground( new Color(255,230,208));
+
+    }//GEN-LAST:event_bmrMouseExited
+
+    private void bfMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseEntered
+        bf.setBackground(Color.GRAY);
+
+    }//GEN-LAST:event_bfMouseEntered
+
+    private void bfMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseExited
+        bf.setBackground( new Color(255,230,208));
+
+    }//GEN-LAST:event_bfMouseExited
+
+    private void bloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseEntered
+        blo.setBackground(Color.GRAY);
+
+    }//GEN-LAST:event_bloMouseEntered
+
+    private void bloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseExited
+        blo.setBackground( new Color(255,230,208));
+
+    }//GEN-LAST:event_bloMouseExited
+
+    private void bopMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bopMouseEntered
+        bop.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bopMouseEntered
+
+    private void bopMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bopMouseExited
+        bop.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bopMouseExited
+
+    private void bedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bedMouseEntered
+        bed.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bedMouseEntered
+
+    private void bedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bedMouseExited
+        bed.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bedMouseExited
+
+    private void bdeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bdeMouseEntered
+        bde.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bdeMouseEntered
+
+    private void bdeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bdeMouseExited
+        bde.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bdeMouseExited
+
+    private void bcrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcrMouseEntered
+        bcr.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bcrMouseEntered
+
+    private void bcrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcrMouseExited
+        bcr.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bcrMouseExited
 
     /**
      * @param args the command line arguments
@@ -565,18 +709,17 @@ public class MyRecipes  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bcr;
+    private javax.swing.JButton bde;
+    private javax.swing.JButton bed;
+    private javax.swing.JButton bf;
+    private javax.swing.JButton blo;
+    private javax.swing.JButton bmr;
+    private javax.swing.JButton bop;
     private javax.swing.JCheckBox car;
     private javax.swing.JCheckBox cer;
     private javax.swing.JLabel flname;
     private javax.swing.JCheckBox fruc;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -585,6 +728,7 @@ public class MyRecipes  extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox lac;
     private javax.swing.JCheckBox leg;

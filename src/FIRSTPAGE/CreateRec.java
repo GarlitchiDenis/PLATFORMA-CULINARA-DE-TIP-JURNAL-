@@ -9,6 +9,7 @@ import static FIRSTPAGE.HOME.nmm;
 import Friends.DisplayFriends;
 import Log.Login;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -397,11 +399,24 @@ public class CreateRec  extends javax.swing.JFrame {
     }//GEN-LAST:event_carActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       // JFileChooser ch=new  JFileChooser();
+       //ch.showOpenDialog(null);
+         //File f=ch.getSelectedFile(); 
+        //lbi.setIcon(new ImageIcon(f.toString()));         
+        //ImagePath=f.getAbsolutePath();
         JFileChooser ch=new  JFileChooser();
-       ch.showOpenDialog(null);
-         File f=ch.getSelectedFile();
-        lbi.setIcon(new ImageIcon(f.toString()));         
-        ImagePath=f.getAbsolutePath();
+        FileNameExtensionFilter filter= new FileNameExtensionFilter("*.IMAGE","jpg","png","gif");
+        ch.addChoosableFileFilter(filter);
+        int result=ch.showSaveDialog(this);
+        if(result==JFileChooser.APPROVE_OPTION){
+            File f=ch.getSelectedFile(); 
+            ImagePath=f.getAbsolutePath();
+            try{
+            lbi.setIcon(ResizeImage(ImagePath));  
+            }catch (Exception exception){
+            JOptionPane.showMessageDialog(this, "Image Error: " + exception.getMessage());}
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -420,15 +435,14 @@ public class CreateRec  extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -475,4 +489,18 @@ public class CreateRec  extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> tip;
     // End of variables declaration//GEN-END:variables
 
+    private ImageIcon ResizeImage(String imgPath){
+        int imageX = 240;
+        int imageY = 310;
+        lbi.setSize(imageX, imageY);
+        ImageIcon myImage = new ImageIcon(imgPath);
+        Image img = myImage.getImage();
+        Image newImage = img.getScaledInstance(lbi.getWidth(), lbi.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImage);
+        return image;
+    }
+    
+    
+    
 }
+

@@ -78,7 +78,7 @@ public class HOME extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
         menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
-        flname.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        flname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         flname.setText("name");
         menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 100, 30));
 
