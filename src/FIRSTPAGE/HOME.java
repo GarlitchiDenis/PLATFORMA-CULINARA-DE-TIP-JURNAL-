@@ -7,6 +7,8 @@ package FIRSTPAGE;
 
 import Friends.DisplayFriends;
 import Log.Login;
+import java.awt.Color;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,9 +34,13 @@ public class HOME extends javax.swing.JFrame {
     public HOME() {
         initComponents();
         flname.setText(nmm);
-        
+        Seticon();
         
     }
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,27 +51,28 @@ public class HOME extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
+        jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         flname = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        blo = new javax.swing.JButton();
+        bf = new javax.swing.JButton();
+        bmr = new javax.swing.JButton();
         opmen = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menu.hide();
-        menu.setBackground(new java.awt.Color(204, 255, 204));
+        menu.setBackground(new java.awt.Color(228, 236, 193));
+        menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, new java.awt.Color(228, 236, 193), java.awt.Color.black, java.awt.Color.lightGray));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("MERGE");
-        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 90, 50));
 
         jLabel2.setBackground(new java.awt.Color(255, 230, 208));
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
@@ -73,32 +80,59 @@ public class HOME extends javax.swing.JFrame {
 
         flname.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         flname.setText("name");
-        menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
+        menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 100, 30));
 
-        jButton1.setBackground(new java.awt.Color(255, 230, 208));
-        jButton1.setText("Log Out");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        blo.setBackground(new java.awt.Color(255, 230, 208));
+        blo.setText("LOG OUT");
+        blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        blo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bloMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bloMouseExited(evt);
             }
         });
-        menu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
-
-        jButton2.setText("FRIENDS");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        blo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bloActionPerformed(evt);
             }
         });
-        menu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 430, 90, -1));
 
-        jButton3.setText("MYRECIPES");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        bf.setBackground(new java.awt.Color(255, 230, 208));
+        bf.setText("FRIENDS");
+        bf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bfMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bfMouseExited(evt);
             }
         });
-        menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        bf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bfActionPerformed(evt);
+            }
+        });
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+
+        bmr.setBackground(new java.awt.Color(255, 230, 208));
+        bmr.setText("MYRECIPES");
+        bmr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bmrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bmrMouseExited(evt);
+            }
+        });
+        bmr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmrActionPerformed(evt);
+            }
+        });
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 480));
 
@@ -112,9 +146,13 @@ public class HOME extends javax.swing.JFrame {
         });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\home.jpg")); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 520));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 520));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void opmenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_opmenMouseClicked
@@ -129,13 +167,13 @@ public class HOME extends javax.swing.JFrame {
     
     }//GEN-LAST:event_opmenMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloActionPerformed
         dispose();
         Login lg= new Login();
         lg.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bloActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfActionPerformed
         try {
             dispose();
             DisplayFriends p=new DisplayFriends();
@@ -143,9 +181,9 @@ public class HOME extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(HOME.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bfActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmrActionPerformed
         try {
             dispose();
             MyRecipes p=new MyRecipes();
@@ -153,7 +191,31 @@ public class HOME extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(HOME.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bmrActionPerformed
+
+    private void bmrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseEntered
+        bmr.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bmrMouseEntered
+
+    private void bmrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseExited
+        bmr.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bmrMouseExited
+
+    private void bfMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseEntered
+        bf.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bfMouseEntered
+
+    private void bfMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseExited
+        bf.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bfMouseExited
+
+    private void bloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseEntered
+        blo.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bloMouseEntered
+
+    private void bloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseExited
+        blo.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bloMouseExited
 
     /**
      * @param args the command line arguments
@@ -192,12 +254,12 @@ public class HOME extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bf;
+    private javax.swing.JButton blo;
+    private javax.swing.JButton bmr;
     private javax.swing.JLabel flname;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel menu;
     private javax.swing.JButton opmen;

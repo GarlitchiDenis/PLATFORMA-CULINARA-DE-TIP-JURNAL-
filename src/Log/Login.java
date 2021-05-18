@@ -105,13 +105,13 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         breg = new javax.swing.JButton();
         blog1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         fpas = new javax.swing.JLabel();
         luser = new javax.swing.JTextField();
         lpass = new javax.swing.JPasswordField();
         remember = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         pswEncrypt = new javax.swing.JLabel();
 
@@ -161,10 +161,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(blog1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 170, 50));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 40, 50));
-
-        jLabel2.setToolTipText("");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 40, 60));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Remember me");
@@ -195,6 +191,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(remember, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 30, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 40, 50));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\padlock (3).png")); // NOI18N
+        jLabel2.setToolTipText("");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 40, 60));
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\log bunaur.jpg")); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -10, 1110, 680));
@@ -243,7 +246,7 @@ public class Login extends javax.swing.JFrame {
     } 
         
         try {
-					String sql = "SELECT * FROM licenta.login WHERE username =? and password =? ";
+					String sql = "SELECT * FROM licenta.login WHERE binary username =? and binary password =? ";
 					connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
 					pst = connection.prepareStatement(sql);
 					vps = lpass.getText();

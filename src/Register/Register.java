@@ -236,7 +236,7 @@ public class Register extends javax.swing.JFrame {
 
             pst.setString(4, gen.getSelectedItem().toString());
             pst.setString(5, fname.getText());
-            if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email.getText()))) {
+            if (!(Pattern.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email.getText()))) {
                  JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);}
             else if((email.getText().equals(vem))){
                          JOptionPane.showMessageDialog(null, "This email address is already being used", "Error", JOptionPane.ERROR_MESSAGE);
