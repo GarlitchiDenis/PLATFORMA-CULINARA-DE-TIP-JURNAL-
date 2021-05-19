@@ -9,26 +9,28 @@ import static FIRSTPAGE.HOME.nmm;
 import static FIRSTPAGE.MyRecipes.nm_rec;
 import Friends.DisplayFriends;
 import Log.Login;
+import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -59,8 +61,14 @@ public class EditRec  extends javax.swing.JFrame {
         flname.setText(nmm);
         nre.setText(nm_rec);
         DisplayData();
+        Seticon();
         
      
+    }
+  
+    
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
     
      private void DisplayData() throws SQLException, IOException{
@@ -119,7 +127,8 @@ public class EditRec  extends javax.swing.JFrame {
             }else{
                 cer.setSelected(false);}  
            BufferedImage im = ImageIO.read(rs.getBinaryStream("images"));
-           lbi.setIcon(new ImageIcon(im));
+           lbi.setIcon(ResizeBuffer(im));
+         
             
 }   
        }catch(SQLException ex) {
@@ -137,14 +146,15 @@ public class EditRec  extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
+        jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         flname = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        blo = new javax.swing.JButton();
+        bf = new javax.swing.JButton();
+        bmr = new javax.swing.JButton();
         opmen = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -153,7 +163,7 @@ public class EditRec  extends javax.swing.JFrame {
         cer = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         tip = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
+        bsv = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -168,19 +178,20 @@ public class EditRec  extends javax.swing.JFrame {
         inre = new java.awt.TextArea();
         mpre = new java.awt.TextArea();
         lbi = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        bup = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(235, 236, 193));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menu.hide();
-        menu.setBackground(new java.awt.Color(204, 255, 204));
+        menu.setBackground(new java.awt.Color(228, 236, 193));
+        menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("editare");
-        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 90, 50));
 
         jLabel2.setBackground(new java.awt.Color(255, 230, 208));
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
@@ -190,30 +201,59 @@ public class EditRec  extends javax.swing.JFrame {
         flname.setText("name");
         menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 230, 208));
-        jButton1.setText("Log Out");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        blo.setBackground(new java.awt.Color(255, 230, 208));
+        blo.setText("LOG OUT");
+        blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        blo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bloMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bloMouseExited(evt);
             }
         });
-        menu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
+        blo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bloActionPerformed(evt);
+            }
+        });
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
 
-        jButton2.setText("FRIENDS");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        bf.setBackground(new java.awt.Color(255, 230, 208));
+        bf.setText("FRIENDS");
+        bf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bfMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bfMouseExited(evt);
             }
         });
-        menu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        bf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bfActionPerformed(evt);
+            }
+        });
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
 
-        jButton3.setText("MYRECIPES");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        bmr.setBackground(new java.awt.Color(255, 230, 208));
+        bmr.setText("MYRECIPES");
+        bmr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bmr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bmrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bmrMouseExited(evt);
             }
         });
-        menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        bmr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmrActionPerformed(evt);
+            }
+        });
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 480));
 
@@ -227,10 +267,10 @@ public class EditRec  extends javax.swing.JFrame {
         });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
-        jLabel4.setText("INGREDIENTE");
+        jLabel4.setText("INGREDIENTS");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
-        jLabel5.setText("MOD PREPARARE");
+        jLabel5.setText("PREPARATION MODE");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
         jPanel1.add(nre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 290, -1));
 
@@ -244,19 +284,29 @@ public class EditRec  extends javax.swing.JFrame {
         });
         jPanel1.add(cer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, -1, -1));
 
-        jLabel7.setText("TIP");
+        jLabel7.setText("TYPE");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
 
         tip.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PRIVAT", "PUBLIC" }));
         jPanel1.add(tip, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
-        jButton4.setText("SAVE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+        bsv.setBackground(new java.awt.Color(255, 230, 208));
+        bsv.setText("SAVE");
+        bsv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bsv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bsvMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bsvMouseExited(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
+        bsv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bsvActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bsv, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
 
         jLabel3.setText("NUME");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, 20));
@@ -316,17 +366,31 @@ public class EditRec  extends javax.swing.JFrame {
         lbi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(lbi, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 240, 310));
 
-        jButton5.setText("UPLOAD");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+        bup.setBackground(new java.awt.Color(255, 230, 208));
+        bup.setText("UPLOAD");
+        bup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bupMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bupMouseExited(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
+        bup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bupActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bup, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
+
+        jLabel8.setText("TYPE OF FOOD");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void opmenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_opmenMouseClicked
@@ -341,13 +405,13 @@ public class EditRec  extends javax.swing.JFrame {
     
     }//GEN-LAST:event_opmenMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloActionPerformed
         dispose();
         Login lg= new Login();
         lg.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bloActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfActionPerformed
         try {
             dispose();
             DisplayFriends p=new DisplayFriends();
@@ -355,9 +419,9 @@ public class EditRec  extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bfActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmrActionPerformed
         try {
             dispose();
             MyRecipes p=new MyRecipes();
@@ -365,10 +429,12 @@ public class EditRec  extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(EditRec.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bmrActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     try {
+    private void bsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsvActionPerformed
+   int opt=JOptionPane.showConfirmDialog(null, "Are you sure to Edit", "Edit", JOptionPane.YES_NO_OPTION);
+     if(opt==0){  
+                    try {
                                          int l;
                                          int cr;
                                          int o;
@@ -481,13 +547,17 @@ public class EditRec  extends javax.swing.JFrame {
                                        pst.setString(10, String.valueOf(ce)); 
                                            
                                          }
-                                        if(pst.executeUpdate()==1){JOptionPane.showMessageDialog(null,"MERGE");}else{JOptionPane.showMessageDialog(null,"nup");}
+                                       
                                        pst.executeUpdate();
-                                       JOptionPane.showMessageDialog(null,"Register SUCCESSFULY");
+                                       if(pst.executeUpdate()==1){
+                                       JOptionPane.showMessageDialog(null,"Update Successfully");
+                                       dispose();
+                                       MyRecipes mrs=new MyRecipes();
+                                       mrs.setVisible(true);}
     }catch(HeadlessException | SQLException ex) {
-	JOptionPane.showMessageDialog(null,"nu merge");} 
-                                      
-    }//GEN-LAST:event_jButton4ActionPerformed
+	JOptionPane.showMessageDialog(null,"Error");} 
+     }                                  
+    }//GEN-LAST:event_bsvActionPerformed
 
     private void cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerActionPerformed
         // TODO add your handling code here:
@@ -513,13 +583,60 @@ public class EditRec  extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_carActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JFileChooser ch=new  JFileChooser();
-       ch.showOpenDialog(null);
-         File f=ch.getSelectedFile();
-        lbi.setIcon(new ImageIcon(f.toString()));         
-        ImagePath=f.getAbsolutePath();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void bupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bupActionPerformed
+         JFileChooser ch=new  JFileChooser();
+        FileNameExtensionFilter filter= new FileNameExtensionFilter("*.IMAGE","jpg","png","gif");
+        ch.addChoosableFileFilter(filter);
+        int result=ch.showSaveDialog(this);
+        if(result==JFileChooser.APPROVE_OPTION){
+            File f=ch.getSelectedFile(); 
+            ImagePath=f.getAbsolutePath();
+            try{
+            lbi.setIcon(ResizeImage(ImagePath));  
+            }catch (Exception exception){
+            JOptionPane.showMessageDialog(this, "Image Error: " + exception.getMessage());}
+        }
+    }//GEN-LAST:event_bupActionPerformed
+
+    private void bmrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseEntered
+       bmr.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bmrMouseEntered
+
+    private void bmrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseExited
+         bmr.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bmrMouseExited
+
+    private void bfMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseEntered
+         bf.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bfMouseEntered
+
+    private void bfMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseExited
+         bf.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bfMouseExited
+
+    private void bloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseEntered
+       blo.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bloMouseEntered
+
+    private void bloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseExited
+        blo.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bloMouseExited
+
+    private void bsvMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bsvMouseEntered
+        bsv.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bsvMouseEntered
+
+    private void bsvMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bsvMouseExited
+       bsv.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bsvMouseExited
+
+    private void bupMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bupMouseEntered
+         bup.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bupMouseEntered
+
+    private void bupMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bupMouseExited
+        bup.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bupMouseExited
 
     /**
      * @param args the command line arguments
@@ -537,15 +654,14 @@ public class EditRec  extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(HOME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -558,17 +674,16 @@ public class EditRec  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bf;
+    private javax.swing.JButton blo;
+    private javax.swing.JButton bmr;
+    private javax.swing.JButton bsv;
+    private javax.swing.JButton bup;
     private javax.swing.JCheckBox car;
     private javax.swing.JCheckBox cer;
     private javax.swing.JLabel flname;
     private javax.swing.JCheckBox fruc;
     private java.awt.TextArea inre;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -579,6 +694,7 @@ public class EditRec  extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JCheckBox lac;
@@ -592,4 +708,25 @@ public class EditRec  extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> tip;
     // End of variables declaration//GEN-END:variables
 
+    private ImageIcon ResizeImage(String imgPath){
+        int imageX = 240;
+        int imageY = 310;
+        lbi.setSize(imageX, imageY);
+        ImageIcon myImage = new ImageIcon(imgPath);
+        Image img = myImage.getImage();
+        Image newImage = img.getScaledInstance(lbi.getWidth(), lbi.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImage);
+        return image;
+    }
+    
+    private ImageIcon ResizeBuffer(BufferedImage imgPath){
+        int imageX = 240;
+        int imageY = 310;
+        lbi.setSize(imageX, imageY);
+        ImageIcon myImage = new ImageIcon(imgPath);
+        Image img = myImage.getImage();
+        Image newImage = img.getScaledInstance(lbi.getWidth(), lbi.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImage);
+        return image;
+    }
 }

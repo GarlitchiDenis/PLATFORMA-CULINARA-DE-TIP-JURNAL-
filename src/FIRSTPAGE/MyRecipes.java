@@ -252,7 +252,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bcrActionPerformed(evt);
             }
         });
-        jPanel1.add(bcr, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
+        jPanel1.add(bcr, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, -1, -1));
 
         t1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -270,7 +270,7 @@ public class MyRecipes  extends javax.swing.JFrame {
         jScrollPane1.setViewportView(t1);
         t1.getAccessibleContext().setAccessibleName("r");
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 310, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 550, 280));
 
         bde.setBackground(new java.awt.Color(255, 230, 208));
         bde.setText("DELETE");
@@ -288,7 +288,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bdeActionPerformed(evt);
             }
         });
-        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, -1, -1));
+        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 80, -1));
 
         bop.setBackground(new java.awt.Color(255, 230, 208));
         bop.setText("OPEN");
@@ -306,7 +306,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bopActionPerformed(evt);
             }
         });
-        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, -1));
+        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 80, -1));
 
         bed.setBackground(new java.awt.Color(255, 230, 208));
         bed.setText("EDIT");
@@ -324,70 +324,70 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bedActionPerformed(evt);
             }
         });
-        jPanel1.add(bed, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, -1, -1));
+        jPanel1.add(bed, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 80, -1));
 
         jLabel3.setText("DAIRIES");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, 20));
 
         jLabel4.setText("MEAT");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, 20));
 
         jLabel5.setText("EGGS");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, 20));
 
         jLabel6.setText("FRUITS");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, 20));
 
         jLabel7.setText("VEGETABLES");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, 20));
 
         jLabel8.setText("CEREALS");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, -1, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, 20));
 
         cer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerActionPerformed(evt);
             }
         });
-        jPanel1.add(cer, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
+        jPanel1.add(cer, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
         lac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lacActionPerformed(evt);
             }
         });
-        jPanel1.add(lac, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+        jPanel1.add(lac, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
         car.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carActionPerformed(evt);
             }
         });
-        jPanel1.add(car, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
+        jPanel1.add(car, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
         ou.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ouActionPerformed(evt);
             }
         });
-        jPanel1.add(ou, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
+        jPanel1.add(ou, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
         fruc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 frucActionPerformed(evt);
             }
         });
-        jPanel1.add(fruc, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, -1));
+        jPanel1.add(fruc, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
 
         leg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 legActionPerformed(evt);
             }
         });
-        jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, -1));
+        jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(228, 236, 193));
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1100, 40));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 810, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 430));
 
@@ -560,14 +560,17 @@ public class MyRecipes  extends javax.swing.JFrame {
     private void bdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdeActionPerformed
         int row=t1.getSelectedRow();
         String n_rec=t1.getModel().getValueAt(row,0).toString();
-        try{
+       int opt=JOptionPane.showConfirmDialog(null, "Are you sure to Delete", "Delete", JOptionPane.YES_NO_OPTION);
+       if(opt==0){ 
+       try{
             String qur="DELETE FROM `licenta`.`recipes` WHERE name='"+n_rec+"'";
             prs =connection.prepareStatement(qur);
             prs.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Reteta a fost stearsa cu succes");
+            JOptionPane.showMessageDialog(null,"Deleted Successfully");
             DisplayTable();
 
-        }catch(SQLException e){}
+        }catch(SQLException e){}}
+       
     }//GEN-LAST:event_bdeActionPerformed
 
     private void bcrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcrActionPerformed
