@@ -252,7 +252,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bcrActionPerformed(evt);
             }
         });
-        jPanel1.add(bcr, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, -1, -1));
+        jPanel1.add(bcr, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, -1, -1));
 
         t1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -288,7 +288,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bdeActionPerformed(evt);
             }
         });
-        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 80, -1));
+        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 80, -1));
 
         bop.setBackground(new java.awt.Color(255, 230, 208));
         bop.setText("OPEN");
@@ -324,7 +324,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bedActionPerformed(evt);
             }
         });
-        jPanel1.add(bed, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 80, -1));
+        jPanel1.add(bed, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 80, -1));
 
         jLabel3.setText("DAIRIES");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, 20));

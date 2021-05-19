@@ -211,6 +211,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        t3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(t3);
         t3.getAccessibleContext().setAccessibleName("r");
 
@@ -283,8 +284,6 @@ public class FriendRecipes  extends javax.swing.JFrame {
             }
         });
         jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
-
-        rfname.setText("Retetele lui:");
         jPanel1.add(rfname, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, 150, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
