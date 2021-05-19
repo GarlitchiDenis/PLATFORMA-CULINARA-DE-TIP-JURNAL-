@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Register;
 
 import Log.Login;
@@ -120,38 +116,38 @@ public class Register extends javax.swing.JFrame {
         jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 230, 40));
 
         gen.setBackground(new java.awt.Color(255, 230, 208));
-        gen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINE", "FEMININE", "NEUTER", " " }));
+        gen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULIN", "FEMININ", "NEUTRU", " " }));
         gen.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 230, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel3.setText("USERNAME");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 90, 30));
+        jLabel3.setText("NUME UTILIZATOR");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 140, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel1.setText("CONFIRM PASSWORD");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 150, 30));
+        jLabel1.setText("REPETA PAROLA");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 130, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel4.setText("PASSWORD");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 110, 30));
+        jLabel4.setText("PAROLA");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 110, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel5.setText("GENDER");
+        jLabel5.setText("GEN");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 90, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel6.setText("FULL NAME");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 100, 30));
+        jLabel6.setText("NUME");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 100, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("EMAIL");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 90, 30));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 90, 30));
 
         breg.setBackground(new java.awt.Color(255, 230, 208));
         breg.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        breg.setText("REGISTER");
+        breg.setText("ÎNREGISTRARE");
         breg.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         breg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         breg.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -237,30 +233,30 @@ public class Register extends javax.swing.JFrame {
             pst.setString(4, gen.getSelectedItem().toString());
             pst.setString(5, fname.getText());
             if (!(Pattern.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email.getText()))) {
-                 JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);}
+                 JOptionPane.showMessageDialog(null, "Introdu o adresă de e-mail validă ", "Error", JOptionPane.ERROR_MESSAGE);}
             else if((email.getText().equals(vem))){
-                         JOptionPane.showMessageDialog(null, "This email address is already being used", "Error", JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showMessageDialog(null, "Această adresă de e-mail este deja utilizată ", "Error", JOptionPane.ERROR_MESSAGE);
                          }
             
             else if(psw.getText().length()<6 || psw.getText().length()>=30 ) {
-                 JOptionPane.showMessageDialog(null, "Your password must be between 5 and 30 characte", "Error", JOptionPane.ERROR_MESSAGE);}
+                 JOptionPane.showMessageDialog(null, "Parola  trebuie să aibă între 5 și 30 de caractere ", "Error", JOptionPane.ERROR_MESSAGE);}
             
             else if((fname.getText().equals(vfn))){
-                         JOptionPane.showMessageDialog(null, "This full name is already being used", "Error", JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showMessageDialog(null, "Acest nume este deja utilizat ", "Error", JOptionPane.ERROR_MESSAGE);
                          }
            
             else if(usr.getText().length()<6  || usr.getText().length()>=30 ) {
-                JOptionPane.showMessageDialog(null, "Your username must be between 5 and 30 charactel", "Error", JOptionPane.ERROR_MESSAGE);}
+                JOptionPane.showMessageDialog(null, "Numele de utilizator trebuie să aibă între 5 și 30 de caractere ", "Error", JOptionPane.ERROR_MESSAGE);}
             else if((email.getText().equals(vem))){
-                         JOptionPane.showMessageDialog(null, "This username is already being used", "Error", JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showMessageDialog(null, "Acest nume de utilizator este deja utilizat ", "Error", JOptionPane.ERROR_MESSAGE);
                          }
             else  if(!(psw.getText().equals(cpsw.getText()))){
-                         JOptionPane.showMessageDialog(null, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showMessageDialog(null, "Parolele nu se potrivesc ", "Error", JOptionPane.ERROR_MESSAGE);
                          }
             
             else{
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Register Successfuly");
+                JOptionPane.showMessageDialog(null, "Înregistrare cu succes");
                 dispose();
                  Login lg = new Login();
                 lg.setVisible(true);
@@ -272,7 +268,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_bregActionPerformed
 
     private void pswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_pswActionPerformed
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked

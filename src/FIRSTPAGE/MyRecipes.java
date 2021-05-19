@@ -82,7 +82,7 @@ public class MyRecipes  extends javax.swing.JFrame {
             if(rs.next()){
             addid=rs.getString("id");}
             if(lac.isSelected() || car.isSelected() || ou.isSelected()|| fruc.isSelected() || leg.isSelected() || cer.isSelected()){
-             sql="SELECT name as NAME FROM licenta.recipes WHERE id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";       
+             sql="SELECT name as NUME FROM licenta.recipes WHERE id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";       
              
              ps2 =connection.prepareStatement(sql);
                                               rs2 = ps2.executeQuery();  
@@ -93,7 +93,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                                                 fr=Integer.parseInt(res.getString("fruit"));
                                                 le=Integer.parseInt(res.getString("vegetables"));
                                                 ce=Integer.parseInt(res.getString("cereals"));}
-            }else{sql="SELECT name as NAME FROM licenta.recipes WHERE id ='"+addid+"'";}
+            }else{sql="SELECT name as NUME FROM licenta.recipes WHERE id ='"+addid+"'";}
             pst =connection.prepareStatement(sql);
             res = pst.executeQuery();
             t1.setModel(DbUtils.resultSetToTableModel(res));
@@ -166,7 +166,7 @@ public class MyRecipes  extends javax.swing.JFrame {
         menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 100, 20));
 
         blo.setBackground(new java.awt.Color(255, 230, 208));
-        blo.setText("LOG OUT");
+        blo.setText("IEȘIRE CONT");
         blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         blo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -181,10 +181,10 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bloActionPerformed(evt);
             }
         });
-        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         bf.setBackground(new java.awt.Color(255, 230, 208));
-        bf.setText("FRIENDS");
+        bf.setText("PRIETENI");
         bf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -199,10 +199,10 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bfActionPerformed(evt);
             }
         });
-        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 130, -1));
 
         bmr.setBackground(new java.awt.Color(255, 230, 208));
-        bmr.setText("MYRECIPES");
+        bmr.setText("REȚETELE MELE");
         bmr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bmr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -217,9 +217,9 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bmrActionPerformed(evt);
             }
         });
-        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 130, -1));
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 390));
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 150, 390));
 
         opmen.setBackground(new java.awt.Color(255, 230, 208));
         opmen.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\menu (1).png")); // NOI18N
@@ -237,7 +237,7 @@ public class MyRecipes  extends javax.swing.JFrame {
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
         bcr.setBackground(new java.awt.Color(255, 230, 208));
-        bcr.setText("CREATE");
+        bcr.setText("CREARE");
         bcr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bcr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -252,7 +252,7 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bcrActionPerformed(evt);
             }
         });
-        jPanel1.add(bcr, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, -1, -1));
+        jPanel1.add(bcr, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, 110, -1));
 
         t1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -273,7 +273,7 @@ public class MyRecipes  extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 550, 280));
 
         bde.setBackground(new java.awt.Color(255, 230, 208));
-        bde.setText("DELETE");
+        bde.setText("ȘTERGERE");
         bde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bde.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -288,10 +288,10 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bdeActionPerformed(evt);
             }
         });
-        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 80, -1));
+        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 110, -1));
 
         bop.setBackground(new java.awt.Color(255, 230, 208));
-        bop.setText("OPEN");
+        bop.setText("DESCHIDE");
         bop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -306,10 +306,10 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bopActionPerformed(evt);
             }
         });
-        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 80, -1));
+        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 110, -1));
 
         bed.setBackground(new java.awt.Color(255, 230, 208));
-        bed.setText("EDIT");
+        bed.setText("MODIFICARE");
         bed.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bed.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -324,24 +324,24 @@ public class MyRecipes  extends javax.swing.JFrame {
                 bedActionPerformed(evt);
             }
         });
-        jPanel1.add(bed, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 80, -1));
+        jPanel1.add(bed, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 110, -1));
 
-        jLabel3.setText("DAIRIES");
+        jLabel3.setText("LAPTE");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, 20));
 
-        jLabel4.setText("MEAT");
+        jLabel4.setText("CARNE");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, 20));
 
-        jLabel5.setText("EGGS");
+        jLabel5.setText("OUA");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, 20));
 
-        jLabel6.setText("FRUITS");
+        jLabel6.setText("FRUCTE");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, 20));
 
-        jLabel7.setText("VEGETABLES");
+        jLabel7.setText("LEGUME");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, 20));
 
-        jLabel8.setText("CEREALS");
+        jLabel8.setText("CEREALE");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, 20));
 
         cer.addActionListener(new java.awt.event.ActionListener() {
@@ -560,13 +560,13 @@ public class MyRecipes  extends javax.swing.JFrame {
     private void bdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdeActionPerformed
         int row=t1.getSelectedRow();
         String n_rec=t1.getModel().getValueAt(row,0).toString();
-       int opt=JOptionPane.showConfirmDialog(null, "Are you sure to Delete", "Delete", JOptionPane.YES_NO_OPTION);
+       int opt=JOptionPane.showConfirmDialog(null, "Sigur ștergeți?", "ȘTERGERE", JOptionPane.YES_NO_OPTION);
        if(opt==0){ 
        try{
             String qur="DELETE FROM `licenta`.`recipes` WHERE name='"+n_rec+"'";
             prs =connection.prepareStatement(qur);
             prs.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Deleted Successfully");
+            JOptionPane.showMessageDialog(null,"Șters cu succes ");
             DisplayTable();
 
         }catch(SQLException e){}}

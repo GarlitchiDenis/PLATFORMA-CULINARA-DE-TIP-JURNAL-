@@ -68,7 +68,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         bbsnd.setBackground(new java.awt.Color(255, 230, 208));
         bbsnd.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        bbsnd.setText("SEND");
+        bbsnd.setText("TRIMITE CATRE EMAIL");
         bbsnd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bbsnd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bbsnd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -84,7 +84,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                 bbsndActionPerformed(evt);
             }
         });
-        jPanel1.add(bbsnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 160, 40));
+        jPanel1.add(bbsnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 160, 40));
 
         vemail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         vemail.addActionListener(new java.awt.event.ActionListener() {
@@ -92,18 +92,18 @@ public class ForgotPassword extends javax.swing.JFrame {
                 vemailActionPerformed(evt);
             }
         });
-        jPanel1.add(vemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 300, 40));
+        jPanel1.add(vemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 300, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("CODE");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 130, 60));
+        jLabel1.setText("COD VERIFICARE");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 170, 60));
 
         vcode.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.add(vcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 300, 40));
+        jPanel1.add(vcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 300, 40));
 
         bver.setBackground(new java.awt.Color(255, 230, 208));
         bver.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        bver.setText("VERIFY");
+        bver.setText("VERIFICARE COD");
         bver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bver.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,10 +119,10 @@ public class ForgotPassword extends javax.swing.JFrame {
                 bverActionPerformed(evt);
             }
         });
-        jPanel1.add(bver, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 160, 40));
+        jPanel1.add(bver, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 160, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Email");
+        jLabel2.setText("EMAIL");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 130, 60));
 
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\backk.png")); // NOI18N
@@ -191,10 +191,10 @@ public class ForgotPassword extends javax.swing.JFrame {
             transport.connect(HOST, USER, PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-            JOptionPane.showMessageDialog(null, "Code sent");
+            JOptionPane.showMessageDialog(null, "Codul a fost trimis");
  
         } catch (MessagingException e) {
-            JOptionPane.showMessageDialog(null, "Invalid Email Address", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Adresa de email invalidă", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_bbsndActionPerformed
@@ -205,7 +205,7 @@ public class ForgotPassword extends javax.swing.JFrame {
              NewPassword np= new NewPassword(vemail.getText());
             np.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null,"Code do not match");
+            JOptionPane.showMessageDialog(null,"Codul nu se potrivește ");
         }
     
 

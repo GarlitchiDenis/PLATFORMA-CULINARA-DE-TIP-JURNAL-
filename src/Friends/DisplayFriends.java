@@ -131,23 +131,23 @@ public class DisplayFriends  extends javax.swing.JFrame {
         });
         addframe.getContentPane().add(adfr, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 260, 60));
 
-        jButton7.setText("Add");
+        jButton7.setText("ADĂUGARE");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        addframe.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+        addframe.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, -1, -1));
 
-        jButton8.setText("Cancel");
+        jButton8.setText("IEȘIRE");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        addframe.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+        addframe.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
-        jPanel1.add(addframe, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 410, 270));
+        jPanel1.add(addframe, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 410, 270));
 
         menu.hide();
         menu.setBackground(new java.awt.Color(228, 236, 193));
@@ -156,14 +156,14 @@ public class DisplayFriends  extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(255, 230, 208));
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
-        menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         flname.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         flname.setText("name");
-        menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
+        menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 80, 20));
 
         blo.setBackground(new java.awt.Color(255, 230, 208));
-        blo.setText("LOG OUT");
+        blo.setText("IEȘIRE CONT");
         blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         blo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -178,10 +178,10 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 bloActionPerformed(evt);
             }
         });
-        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
         bf.setBackground(new java.awt.Color(255, 230, 208));
-        bf.setText("FRIENDS");
+        bf.setText("PRIETENI");
         bf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -196,10 +196,10 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 bfActionPerformed(evt);
             }
         });
-        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 130, -1));
 
         bmr.setBackground(new java.awt.Color(255, 230, 208));
-        bmr.setText("MYRECIPES");
+        bmr.setText("REȚETELE MELE");
         bmr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bmr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -214,9 +214,9 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 bmrActionPerformed(evt);
             }
         });
-        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 130, -1));
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 390));
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 160, 390));
 
         opmen.setBackground(new java.awt.Color(255, 230, 208));
         opmen.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\menu (1).png")); // NOI18N
@@ -247,10 +247,10 @@ public class DisplayFriends  extends javax.swing.JFrame {
         t2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(t2);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 470, 210));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 470, 210));
 
         bop.setBackground(new java.awt.Color(255, 230, 208));
-        bop.setText("OPEN");
+        bop.setText("DESCHIDE");
         bop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -265,10 +265,10 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 bopActionPerformed(evt);
             }
         });
-        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 80, -1));
+        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 110, -1));
 
         bad.setBackground(new java.awt.Color(255, 230, 208));
-        bad.setText("ADD");
+        bad.setText("ADĂUGARE");
         bad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -283,10 +283,10 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 badActionPerformed(evt);
             }
         });
-        jPanel1.add(bad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 80, -1));
+        jPanel1.add(bad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 110, -1));
 
         bde.setBackground(new java.awt.Color(255, 230, 208));
-        bde.setText("DELETE");
+        bde.setText("ȘTERGERE");
         bde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bde.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -301,7 +301,7 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 bdeActionPerformed(evt);
             }
         });
-        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 80, -1));
+        jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 110, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
@@ -348,13 +348,13 @@ public class DisplayFriends  extends javax.swing.JFrame {
     private void bdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdeActionPerformed
         int row=t2.getSelectedRow();
         String n_friend=t2.getModel().getValueAt(row,0).toString();
-        int opt=JOptionPane.showConfirmDialog(null, "Are you sure to Delete", "Delete", JOptionPane.YES_NO_OPTION);
+        int opt=JOptionPane.showConfirmDialog(null, "Sigur ștergeți ?", "ȘTERGERE", JOptionPane.YES_NO_OPTION);
        if(opt==0){
         try{
             String qur="DELETE FROM `licenta`.`friends` WHERE fullname='"+n_friend+"' AND id_user='"+addid+"'";
             ps3 =connection.prepareStatement(qur);
             ps3.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Deleted Successfully");
+            JOptionPane.showMessageDialog(null,"Șters cu succes ");
             DisplayTable();
             
 
@@ -386,22 +386,22 @@ public class DisplayFriends  extends javax.swing.JFrame {
             ps6 =connection.prepareStatement(sql2);
             rs4 = ps6.executeQuery();
             if( fl2.equals(fl)){
-                  JOptionPane.showMessageDialog(null,"Error: You can't add yourself to your friends list"); }          
+                  JOptionPane.showMessageDialog(null,"Error: Nu te poți adăuga la lista ta de prieteni "); }          
             else if(rs4.next()){
               String sqlt="INSERT INTO `licenta`.`friends` (`fullname`, `id_user`) VALUES (?,'"+addid+"');";
                 ps4 =connection.prepareStatement(sqlt);
                 ps4.setString(1,adfr.getText());
                 ps4.executeUpdate();
-                JOptionPane.showMessageDialog(null,"The friend has been added ");
+                JOptionPane.showMessageDialog(null,"Prietenul a fost adăugat  ");
                 addframe.dispose();
                 DisplayTable();} 
             else{
-               JOptionPane.showMessageDialog(null,"Error:  You cannot add this person");
+               JOptionPane.showMessageDialog(null,"Error:  Nu puteți adăuga această persoană ");
                 
                     
             
 
-            }}catch(SQLException e){JOptionPane.showMessageDialog(null,"Error: You cannot add this person  ");}
+            }}catch(SQLException e){JOptionPane.showMessageDialog(null,"Error: Nu puteți adăuga această persoană  ");}
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void adfrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adfrActionPerformed

@@ -83,7 +83,7 @@ public class HOME extends javax.swing.JFrame {
         menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 100, 30));
 
         blo.setBackground(new java.awt.Color(255, 230, 208));
-        blo.setText("LOG OUT");
+        blo.setText("IEȘIRE CONT");
         blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         blo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -98,10 +98,10 @@ public class HOME extends javax.swing.JFrame {
                 bloActionPerformed(evt);
             }
         });
-        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 430, 90, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 120, -1));
 
         bf.setBackground(new java.awt.Color(255, 230, 208));
-        bf.setText("FRIENDS");
+        bf.setText("PRIETENI");
         bf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bfMouseEntered(evt);
@@ -115,10 +115,10 @@ public class HOME extends javax.swing.JFrame {
                 bfActionPerformed(evt);
             }
         });
-        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
 
         bmr.setBackground(new java.awt.Color(255, 230, 208));
-        bmr.setText("MYRECIPES");
+        bmr.setText("REȚETELE MELE");
         bmr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bmrMouseEntered(evt);
@@ -132,9 +132,9 @@ public class HOME extends javax.swing.JFrame {
                 bmrActionPerformed(evt);
             }
         });
-        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 130, -1));
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 480));
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 150, 480));
 
         opmen.setBackground(new java.awt.Color(255, 230, 208));
         opmen.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\menu (1).png")); // NOI18N

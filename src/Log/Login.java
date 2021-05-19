@@ -124,7 +124,7 @@ public class Login extends javax.swing.JFrame {
 
         breg.setBackground(new java.awt.Color(255, 230, 208));
         breg.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        breg.setText("REGISTER");
+        breg.setText("ÎNREGISTRARE");
         breg.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         breg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         breg.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,7 +144,7 @@ public class Login extends javax.swing.JFrame {
 
         blog1.setBackground(new java.awt.Color(255, 230, 208));
         blog1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        blog1.setText("LOGIN");
+        blog1.setText("AUTENTIFICARE");
         blog1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         blog1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         blog1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,11 +163,11 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(blog1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 170, 50));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Remember me");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 130, 30));
+        jLabel5.setText("TINE-MA MINTE");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 140, 30));
 
         fpas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        fpas.setText("Forgot password?");
+        fpas.setText("SCHIMBARE PAROLA");
         fpas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fpas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -190,7 +190,7 @@ public class Login extends javax.swing.JFrame {
                 rememberActionPerformed(evt);
             }
         });
-        jPanel1.add(remember, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 30, 30));
+        jPanel1.add(remember, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 30, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 40, 50));
@@ -266,7 +266,7 @@ public class Login extends javax.swing.JFrame {
 						 
 
 					} else {
-                                            JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+                                            JOptionPane.showMessageDialog(null, "Nume de utilizator sau parola incorecte ");
 						
                                                
 					}

@@ -25,7 +25,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -128,7 +127,7 @@ public class CreateRec  extends javax.swing.JFrame {
         menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
 
         blo.setBackground(new java.awt.Color(255, 230, 208));
-        blo.setText("LOG OUT");
+        blo.setText("IEȘIRE CONT");
         blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         blo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -143,10 +142,10 @@ public class CreateRec  extends javax.swing.JFrame {
                 bloActionPerformed(evt);
             }
         });
-        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
         bf.setBackground(new java.awt.Color(255, 230, 208));
-        bf.setText("FRIENDS");
+        bf.setText("PRIETEN");
         bf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -161,10 +160,10 @@ public class CreateRec  extends javax.swing.JFrame {
                 bfActionPerformed(evt);
             }
         });
-        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
 
         bmr.setBackground(new java.awt.Color(255, 230, 208));
-        bmr.setText("MYRECIPES");
+        bmr.setText("REȚETELE MELE");
         bmr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bmr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -179,9 +178,9 @@ public class CreateRec  extends javax.swing.JFrame {
                 bmrActionPerformed(evt);
             }
         });
-        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 130, -1));
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 480));
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 150, 480));
 
         opmen.setBackground(new java.awt.Color(255, 230, 208));
         opmen.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\menu (1).png")); // NOI18N
@@ -198,11 +197,11 @@ public class CreateRec  extends javax.swing.JFrame {
         });
         jPanel1.add(opmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
-        jLabel4.setText("INGREDIENTS");
+        jLabel4.setText("INGREDIENTE");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
-        jLabel5.setText("TYPE OF FOOD");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
+        jLabel5.setText("TIPURI DE ALIMENTE");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
         jPanel1.add(nre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 290, -1));
 
         jLabel6.setText("LACTATE");
@@ -215,14 +214,14 @@ public class CreateRec  extends javax.swing.JFrame {
         });
         jPanel1.add(cer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, -1, -1));
 
-        jLabel7.setText("TYPE");
+        jLabel7.setText("TIP");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
 
         tip.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PRIVAT", "PUBLIC" }));
         jPanel1.add(tip, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         bsv.setBackground(new java.awt.Color(255, 230, 208));
-        bsv.setText("SAVE");
+        bsv.setText("CREARE REȚETĂ");
         bsv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bsv.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -237,21 +236,21 @@ public class CreateRec  extends javax.swing.JFrame {
                 bsvActionPerformed(evt);
             }
         });
-        jPanel1.add(bsv, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
+        jPanel1.add(bsv, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, -1, -1));
 
-        jLabel3.setText("NAME");
+        jLabel3.setText("NUME");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, 20));
 
-        jLabel9.setText("MEAT");
+        jLabel9.setText("CARNE");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
 
-        jLabel10.setText("FRUITS");
+        jLabel10.setText("FRUCTE");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, -1, -1));
 
-        jLabel11.setText("VEGETABLES");
+        jLabel11.setText("LEGUME");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, -1, -1));
 
-        jLabel12.setText("CEREALS");
+        jLabel12.setText("CEREALE");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
 
         lac.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +281,7 @@ public class CreateRec  extends javax.swing.JFrame {
         });
         jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
 
-        jLabel13.setText("EGGS");
+        jLabel13.setText("OUA");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
 
         car.addActionListener(new java.awt.event.ActionListener() {
@@ -298,7 +297,7 @@ public class CreateRec  extends javax.swing.JFrame {
         jPanel1.add(lbi, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 240, 310));
 
         bup.setBackground(new java.awt.Color(255, 230, 208));
-        bup.setText("UPLOAD");
+        bup.setText("ÎNCARCARE IMAGINE");
         bup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -313,9 +312,9 @@ public class CreateRec  extends javax.swing.JFrame {
                 bupActionPerformed(evt);
             }
         });
-        jPanel1.add(bup, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
+        jPanel1.add(bup, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, -1, -1));
 
-        jLabel8.setText("PREPARATION MODE");
+        jLabel8.setText("MOD DE PREPARARE");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
@@ -444,12 +443,12 @@ public class CreateRec  extends javax.swing.JFrame {
                                          
                                          }
                                     if(pst.executeUpdate()==1){
-					JOptionPane.showMessageDialog(null,"Register Successfully");
+					JOptionPane.showMessageDialog(null,"Înregistrare cu succes");
                                         dispose();
                                         MyRecipes mrs=new MyRecipes();
                                         mrs.setVisible(true);}
 				}catch(HeadlessException | SQLException ex) {
-					JOptionPane.showMessageDialog(null,"Eror");
+					JOptionPane.showMessageDialog(null,"Eroare");
 				} 
     }//GEN-LAST:event_bsvActionPerformed
 

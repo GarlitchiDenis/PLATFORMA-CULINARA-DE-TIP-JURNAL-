@@ -202,7 +202,7 @@ public class EditRec  extends javax.swing.JFrame {
         menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
 
         blo.setBackground(new java.awt.Color(255, 230, 208));
-        blo.setText("LOG OUT");
+        blo.setText("IEȘIRE CONT");
         blo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         blo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -217,10 +217,10 @@ public class EditRec  extends javax.swing.JFrame {
                 bloActionPerformed(evt);
             }
         });
-        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
         bf.setBackground(new java.awt.Color(255, 230, 208));
-        bf.setText("FRIENDS");
+        bf.setText("PRIETENI");
         bf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -235,10 +235,10 @@ public class EditRec  extends javax.swing.JFrame {
                 bfActionPerformed(evt);
             }
         });
-        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 130, -1));
 
         bmr.setBackground(new java.awt.Color(255, 230, 208));
-        bmr.setText("MYRECIPES");
+        bmr.setText("REȚETELE MELE");
         bmr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bmr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -253,9 +253,9 @@ public class EditRec  extends javax.swing.JFrame {
                 bmrActionPerformed(evt);
             }
         });
-        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 130, -1));
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 480));
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 150, 480));
 
         opmen.setBackground(new java.awt.Color(255, 230, 208));
         opmen.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\menu (1).png")); // NOI18N
@@ -291,7 +291,7 @@ public class EditRec  extends javax.swing.JFrame {
         jPanel1.add(tip, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         bsv.setBackground(new java.awt.Color(255, 230, 208));
-        bsv.setText("SAVE");
+        bsv.setText("EDITARE REȚETĂ");
         bsv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bsv.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -306,7 +306,7 @@ public class EditRec  extends javax.swing.JFrame {
                 bsvActionPerformed(evt);
             }
         });
-        jPanel1.add(bsv, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
+        jPanel1.add(bsv, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 480, -1, -1));
 
         jLabel3.setText("NUME");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, 20));
@@ -367,7 +367,7 @@ public class EditRec  extends javax.swing.JFrame {
         jPanel1.add(lbi, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 240, 310));
 
         bup.setBackground(new java.awt.Color(255, 230, 208));
-        bup.setText("UPLOAD");
+        bup.setText("ÎNCARCARE IMAGINE");
         bup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -382,7 +382,7 @@ public class EditRec  extends javax.swing.JFrame {
                 bupActionPerformed(evt);
             }
         });
-        jPanel1.add(bup, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
+        jPanel1.add(bup, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, -1, -1));
 
         jLabel8.setText("TYPE OF FOOD");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
@@ -550,7 +550,7 @@ public class EditRec  extends javax.swing.JFrame {
                                        
                                        pst.executeUpdate();
                                        if(pst.executeUpdate()==1){
-                                       JOptionPane.showMessageDialog(null,"Update Successfully");
+                                       JOptionPane.showMessageDialog(null,"Actualizat cu succes");
                                        dispose();
                                        MyRecipes mrs=new MyRecipes();
                                        mrs.setVisible(true);}
@@ -594,7 +594,7 @@ public class EditRec  extends javax.swing.JFrame {
             try{
             lbi.setIcon(ResizeImage(ImagePath));  
             }catch (Exception exception){
-            JOptionPane.showMessageDialog(this, "Image Error: " + exception.getMessage());}
+            JOptionPane.showMessageDialog(this, "eroare imagine: " + exception.getMessage());}
         }
     }//GEN-LAST:event_bupActionPerformed
 

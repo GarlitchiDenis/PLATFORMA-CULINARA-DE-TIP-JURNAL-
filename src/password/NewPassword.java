@@ -97,7 +97,7 @@ public NewPassword(String vemail){
 
         breset.setBackground(new java.awt.Color(255, 230, 208));
         breset.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        breset.setText("RESET");
+        breset.setText("RESETARE PAROLĂ");
         breset.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         breset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         breset.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,14 +116,14 @@ public NewPassword(String vemail){
                 bresetActionPerformed(evt);
             }
         });
-        jPanel1.add(breset, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 128, 35));
+        jPanel1.add(breset, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 170, 35));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("CONFIRM NEW PASSWORD");
+        jLabel1.setText("CONFIRMĂ NOUA PAROLĂ");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 230, 60));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("NEW PASSWORD");
+        jLabel2.setText("NOUA PAROLA");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 140, 50));
 
         respsw.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -178,7 +178,7 @@ public NewPassword(String vemail){
                  JOptionPane.showMessageDialog(null, "Your password must be between 5 and 30 characte", "Error", JOptionPane.ERROR_MESSAGE);}
                  if(respsw.getText().length()>5 && respsw.getText().length()<30 ) {        
                     pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null,"Reset Successfully");
+                    JOptionPane.showMessageDialog(null,"Parola a fost resetată cu succes");
                     dispose();
                     Login lgc= new Login();
                     lgc.setVisible(true);}
@@ -186,7 +186,7 @@ public NewPassword(String vemail){
                  JOptionPane.showMessageDialog(null,e);
             }
         }else{
-                 JOptionPane.showMessageDialog(null,"Password do not match");
+                 JOptionPane.showMessageDialog(null,"Parola nu se potriveste");
              }
         
         
