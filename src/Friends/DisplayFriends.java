@@ -111,8 +111,6 @@ public class DisplayFriends  extends javax.swing.JFrame {
         bop = new javax.swing.JButton();
         bad = new javax.swing.JButton();
         bde = new javax.swing.JButton();
-        aa = new javax.swing.JLabel();
-        bb = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TastyDiary");
@@ -305,12 +303,6 @@ public class DisplayFriends  extends javax.swing.JFrame {
         });
         jPanel1.add(bde, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 80, -1));
 
-        aa.setText("jLabel1");
-        jPanel1.add(aa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 100, 60));
-
-        bb.setText("jLabel1");
-        jPanel1.add(bb, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
         pack();
@@ -382,7 +374,7 @@ public class DisplayFriends  extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try{
             String fl2=adfr.getText();
-            
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
             String sqll="SELECT fullname FROM licenta.login  WHERE id ='"+addid+"'";
             ps5 =connection.prepareStatement(sqll);
             rs3 = ps5.executeQuery();
@@ -390,25 +382,22 @@ public class DisplayFriends  extends javax.swing.JFrame {
             if(rs3.next()){
               fl=rs3.getString("fullname");}
             
-            String sql2="SELECT fullname FROM licenta.login  ";
+            String sql2="SELECT * FROM licenta.login WHERE binary fullname ='"+fl2+"'";
             ps6 =connection.prepareStatement(sql2);
             rs4 = ps6.executeQuery();
-            if(rs4.next()){
-              ff1=rs4.getString("fullname");}
-             bb.setText(fl2);
-             aa.setText(ff1);
             if( fl2.equals(fl)){
-                  JOptionPane.showMessageDialog(null,"Error: You can't add yourself to your friends list"); }
-            else if(fl2.equals(ff1)){
-                  JOptionPane.showMessageDialog(null,"Error:sss  You cannot add this person");  
-              
-            }else{
-                String sqlt="INSERT INTO `licenta`.`friends` (`fullname`, `id_user`) VALUES (?,'"+addid+"');";
+                  JOptionPane.showMessageDialog(null,"Error: You can't add yourself to your friends list"); }          
+            else if(rs4.next()){
+              String sqlt="INSERT INTO `licenta`.`friends` (`fullname`, `id_user`) VALUES (?,'"+addid+"');";
                 ps4 =connection.prepareStatement(sqlt);
                 ps4.setString(1,adfr.getText());
                 ps4.executeUpdate();
                 JOptionPane.showMessageDialog(null,"The friend has been added ");
-                DisplayTable();
+                addframe.dispose();
+                DisplayTable();} 
+            else{
+               JOptionPane.showMessageDialog(null,"Error:  You cannot add this person");
+                
                     
             
 
@@ -515,11 +504,9 @@ public class DisplayFriends  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel aa;
     private javax.swing.JInternalFrame addframe;
     private javax.swing.JTextField adfr;
     private javax.swing.JButton bad;
-    private javax.swing.JLabel bb;
     private javax.swing.JButton bde;
     private javax.swing.JButton bf;
     private javax.swing.JButton blo;

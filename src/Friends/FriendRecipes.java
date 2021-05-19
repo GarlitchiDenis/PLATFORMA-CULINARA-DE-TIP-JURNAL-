@@ -9,6 +9,8 @@ import FIRSTPAGE.*;
 import static FIRSTPAGE.HOME.nmm;
 import static Friends.DisplayFriends.nm_fr;
 import Log.Login;
+import java.awt.Color;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -63,6 +65,11 @@ public class FriendRecipes  extends javax.swing.JFrame {
         initComponents();
         flname.setText(nmm); 
         DisplayTable();
+        Seticon();
+    }
+    
+    public final void Seticon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
     
     private void DisplayTable() throws SQLException{
@@ -80,7 +87,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
             nfr=rs.getString("fullname");}
             rfname.setText(nfr);
             if(lac.isSelected() || car.isSelected() || ou.isSelected()|| fruc.isSelected() || leg.isSelected() || cer.isSelected()){
-             sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE type='PUBLIC' AND id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";       
+             sql="SELECT name as NAME FROM licenta.recipes WHERE type='PUBLIC' AND id ='"+addid+"' AND  (`dairy_products`='"+l+"' or IF('"+l+"'=1,`dairy_products`=1,`dairy_products`=`dairy_products`))  AND  (`meat`='"+cr+"' OR IF('"+cr+"'=1,`meat`=1,`meat`=`meat`)) AND  (`egg`='"+o+"' OR IF('"+o+"'=1,`egg`=1,`egg`=`egg`)) AND  (`fruit`='"+fr+"' OR IF('"+fr+"'=1,`fruit`=1,`fruit`=`fruit`)) AND  (`vegetables`='"+le+"' OR IF('"+le+"'=1,`vegetables`=1,`vegetables`=`vegetables`)) AND  (`cereals`='"+ce+"' OR IF('"+ce+"'=1,`cereals`=1,`cereals`=`cereals`))";       
              ps2 =connection.prepareStatement(sql);
                                               rs2 = ps2.executeQuery();  
                                               if(res.next()){
@@ -90,7 +97,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
                                                 fr=Integer.parseInt(res.getString("fruit"));
                                                 le=Integer.parseInt(res.getString("vegetables"));
                                                 ce=Integer.parseInt(res.getString("cereals"));}
-            }else{sql="SELECT name as nume,ingredients,preparation_mode,images FROM licenta.recipes WHERE id ='"+addid+"' AND type='PUBLIC'";}
+            }else{sql="SELECT name as NAME FROM licenta.recipes WHERE id ='"+addid+"' AND type='PUBLIC'";}
             pst =connection.prepareStatement(sql);
             res = pst.executeQuery();
             t3.setModel(DbUtils.resultSetToTableModel(res));
@@ -112,18 +119,19 @@ public class FriendRecipes  extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setResizable(false);
+        jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         flname = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        blo = new javax.swing.JButton();
+        bf = new javax.swing.JButton();
+        bmr = new javax.swing.JButton();
         opmen = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         t3 = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        bop = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -136,19 +144,20 @@ public class FriendRecipes  extends javax.swing.JFrame {
         ou = new javax.swing.JCheckBox();
         fruc = new javax.swing.JCheckBox();
         leg = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
         rfname = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(235, 236, 193));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menu.hide();
-        menu.setBackground(new java.awt.Color(204, 255, 204));
+        menu.setBackground(new java.awt.Color(228, 236, 193));
+        menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("prieten retete");
-        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 90, 50));
 
         jLabel2.setBackground(new java.awt.Color(255, 230, 208));
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\user (1).png")); // NOI18N
@@ -158,32 +167,58 @@ public class FriendRecipes  extends javax.swing.JFrame {
         flname.setText("name");
         menu.add(flname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 230, 208));
-        jButton1.setText("Log Out");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        blo.setBackground(new java.awt.Color(255, 230, 208));
+        blo.setText("LOG OUT");
+        blo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bloMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bloMouseExited(evt);
             }
         });
-        menu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
-
-        jButton2.setText("FRIENDS");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        blo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bloActionPerformed(evt);
             }
         });
-        menu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
+        menu.add(blo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
-        jButton3.setText("MYRECIPES");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        bf.setBackground(new java.awt.Color(255, 230, 208));
+        bf.setText("FRIENDS");
+        bf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bfMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bfMouseExited(evt);
             }
         });
-        menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        bf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bfActionPerformed(evt);
+            }
+        });
+        menu.add(bf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, -1));
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 480));
+        bmr.setBackground(new java.awt.Color(255, 230, 208));
+        bmr.setText("MYRECIPES");
+        bmr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bmrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bmrMouseExited(evt);
+            }
+        });
+        bmr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmrActionPerformed(evt);
+            }
+        });
+        menu.add(bmr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 390));
 
         opmen.setBackground(new java.awt.Color(255, 230, 208));
         opmen.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\iconite\\menu (1).png")); // NOI18N
@@ -215,15 +250,25 @@ public class FriendRecipes  extends javax.swing.JFrame {
         jScrollPane1.setViewportView(t3);
         t3.getAccessibleContext().setAccessibleName("r");
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 101, 640, 370));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 540, 290));
 
-        jButton6.setText("OPEN");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+        bop.setBackground(new java.awt.Color(255, 230, 208));
+        bop.setText("OPEN");
+        bop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bopMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bopMouseExited(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, -1, -1));
+        bop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bopActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bop, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, -1, -1));
 
         jLabel3.setText("LAPTE");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, 20));
@@ -284,11 +329,15 @@ public class FriendRecipes  extends javax.swing.JFrame {
             }
         });
         jPanel1.add(leg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
-        jPanel1.add(rfname, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, 150, 60));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 520));
+        jPanel2.setBackground(new java.awt.Color(228, 236, 193));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 810, 40));
+        jPanel1.add(rfname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 160, 60));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void legActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_legActionPerformed
@@ -428,7 +477,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cerActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void bopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bopActionPerformed
         try {
             int row=t3.getSelectedRow();
             nm_recfr=t3.getModel().getValueAt(row,0).toString();
@@ -438,7 +487,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(FriendRecipes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_bopActionPerformed
 
     private void opmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opmenActionPerformed
         // TODO add your handling code here:
@@ -456,7 +505,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
 
     }//GEN-LAST:event_opmenMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmrActionPerformed
         try {
             dispose();
             MyRecipes recc=new MyRecipes();
@@ -464,9 +513,9 @@ public class FriendRecipes  extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FriendRecipes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bmrActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfActionPerformed
         try {
             dispose();
             DisplayFriends p=new DisplayFriends();
@@ -474,13 +523,45 @@ public class FriendRecipes  extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FriendRecipes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bfActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloActionPerformed
         dispose();
         Login log= new Login();
         log.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bloActionPerformed
+
+    private void bmrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseEntered
+        bmr.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bmrMouseEntered
+
+    private void bmrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bmrMouseExited
+        bmr.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bmrMouseExited
+
+    private void bfMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseEntered
+       bf.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bfMouseEntered
+
+    private void bfMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bfMouseExited
+        bf.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bfMouseExited
+
+    private void bloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseEntered
+        blo.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bloMouseEntered
+
+    private void bloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloMouseExited
+        blo.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bloMouseExited
+
+    private void bopMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bopMouseEntered
+        bop.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bopMouseEntered
+
+    private void bopMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bopMouseExited
+        bop.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bopMouseExited
 
     /**
      * @param args the command line arguments
@@ -518,15 +599,14 @@ public class FriendRecipes  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bf;
+    private javax.swing.JButton blo;
+    private javax.swing.JButton bmr;
+    private javax.swing.JButton bop;
     private javax.swing.JCheckBox car;
     private javax.swing.JCheckBox cer;
     private javax.swing.JLabel flname;
     private javax.swing.JCheckBox fruc;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -535,6 +615,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox lac;
     private javax.swing.JCheckBox leg;
