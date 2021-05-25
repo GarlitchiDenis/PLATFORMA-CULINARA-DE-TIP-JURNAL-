@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -94,9 +95,17 @@ public class DisplayFrRec  extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addprint = new javax.swing.JInternalFrame();
+        bimp = new javax.swing.JButton();
+        bie = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        printlb = new javax.swing.JTextArea();
+        lbi1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         setResizable(false);
         jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        bim = new javax.swing.JButton();
         menu = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         flname = new javax.swing.JLabel();
@@ -117,8 +126,80 @@ public class DisplayFrRec  extends javax.swing.JFrame {
         setTitle("TastyDiary");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        addprint.setBackground(new java.awt.Color(235, 236, 193));
+        addprint.setVisible(false);
+        addprint.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        bimp.setBackground(new java.awt.Color(255, 230, 208));
+        bimp.setText("IMPRIMARE");
+        bimp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bimp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bimpMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bimpMouseExited(evt);
+            }
+        });
+        bimp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bimpActionPerformed(evt);
+            }
+        });
+        addprint.getContentPane().add(bimp, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 415, 110, 30));
+
+        bie.setBackground(new java.awt.Color(255, 230, 208));
+        bie.setText("IEȘIRE");
+        bie.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bie.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bieMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bieMouseExited(evt);
+            }
+        });
+        bie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bieActionPerformed(evt);
+            }
+        });
+        addprint.getContentPane().add(bie, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 415, 110, 30));
+
+        printlb.setColumns(20);
+        printlb.setRows(5);
+        jScrollPane1.setViewportView(printlb);
+
+        addprint.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 350, 400));
+
+        lbi1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        addprint.getContentPane().add(lbi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 240, 310));
+
+        jPanel2.setBackground(new java.awt.Color(235, 236, 193));
+        addprint.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 560, 500));
+
+        getContentPane().add(addprint, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 560, 500));
+
         jPanel1.setBackground(new java.awt.Color(235, 236, 193));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        bim.setBackground(new java.awt.Color(255, 230, 208));
+        bim.setText("Imprimare");
+        bim.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bimMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bimMouseExited(evt);
+            }
+        });
+        bim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bimActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bim, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
 
         menu.hide();
         menu.setBackground(new java.awt.Color(228, 236, 193));
@@ -316,6 +397,58 @@ public class DisplayFrRec  extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel8MouseClicked
 
+    private void bimpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bimpMouseEntered
+        bimp.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bimpMouseEntered
+
+    private void bimpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bimpMouseExited
+        bimp.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bimpMouseExited
+
+    private void bimpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bimpActionPerformed
+
+        try {
+            printlb.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(DisplayRec.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_bimpActionPerformed
+
+    private void bieMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bieMouseEntered
+        bie.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bieMouseEntered
+
+    private void bieMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bieMouseExited
+        bie.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bieMouseExited
+
+    private void bieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bieActionPerformed
+        addprint.dispose();
+    }//GEN-LAST:event_bieActionPerformed
+
+    private void bimMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bimMouseEntered
+        bim.setBackground(Color.GRAY);
+    }//GEN-LAST:event_bimMouseEntered
+
+    private void bimMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bimMouseExited
+        bim.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_bimMouseExited
+
+    private void bimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bimActionPerformed
+        addprint.setVisible(true);
+        printlb.setText("**********************\n");
+        printlb.setText(printlb.getText()+"\n");
+        printlb.setText(printlb.getText()+"NUME RETETA:   "+nre.getText()+"\n");
+        printlb.setText(printlb.getText()+"\n");
+        printlb.setText(printlb.getText()+"INGREDIENTE:   "+inre.getText()+"\n");
+        printlb.setText(printlb.getText()+"\n");
+        printlb.setText(printlb.getText()+"MOD DE PREPARARE:   "+mpre.getText()+"\n");
+        printlb.setText(printlb.getText()+"\n");
+        printlb.setText(printlb.getText()+"**********************\n");
+
+    }//GEN-LAST:event_bimActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -353,7 +486,11 @@ public class DisplayFrRec  extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame addprint;
     private javax.swing.JButton bf;
+    private javax.swing.JButton bie;
+    private javax.swing.JButton bim;
+    private javax.swing.JButton bimp;
     private javax.swing.JButton blo;
     private javax.swing.JButton bmr;
     private javax.swing.JLabel flname;
@@ -364,11 +501,15 @@ public class DisplayFrRec  extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbi;
+    private javax.swing.JLabel lbi1;
     private javax.swing.JPanel menu;
     private java.awt.TextArea mpre;
     private javax.swing.JTextField nre;
     private javax.swing.JButton opmen;
+    private javax.swing.JTextArea printlb;
     // End of variables declaration//GEN-END:variables
 
     private ImageIcon ResizeBuffer(BufferedImage imgPath){
