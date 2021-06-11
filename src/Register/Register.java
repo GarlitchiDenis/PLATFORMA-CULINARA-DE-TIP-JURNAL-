@@ -40,6 +40,8 @@ public class Register extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
 
+    
+    
     public static StringBuffer encrypt(String text, int s)
     {
         StringBuffer result= new StringBuffer();
@@ -236,6 +238,10 @@ public class Register extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "Introdu o adresă de e-mail validă ", "Error", JOptionPane.ERROR_MESSAGE);}
             else if((email.getText().equals(vem))){
                          JOptionPane.showMessageDialog(null, "Această adresă de e-mail este deja utilizată ", "Error", JOptionPane.ERROR_MESSAGE);
+                         }
+            
+            else if((usr.getText().equals(vus))){
+                         JOptionPane.showMessageDialog(null, "Acest nume de utilizator este deja utilizat ", "Error", JOptionPane.ERROR_MESSAGE);
                          }
             
             else if(psw.getText().length()<6 || psw.getText().length()>=30 ) {

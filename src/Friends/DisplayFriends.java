@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import net.proteanit.sql.DbUtils;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -34,12 +35,14 @@ public class DisplayFriends  extends javax.swing.JFrame {
     ResultSet rs2 = null;
     ResultSet rs3 = null;
     ResultSet rs4 = null;
+    ResultSet rs5 = null;
     PreparedStatement ps = null;
     PreparedStatement ps2 = null;
     PreparedStatement ps3 = null;
     PreparedStatement ps4 = null;
     PreparedStatement ps5 = null;
     PreparedStatement ps6 = null;
+    PreparedStatement ps7 = null;
      public static String ff1=null;
 
     public static String addid=null;
@@ -54,9 +57,22 @@ public class DisplayFriends  extends javax.swing.JFrame {
         flname.setText(nmm);
         DisplayTable();
         Seticon();
-
+        Fillcombo();
+        AutoCompleteDecorator.decorate(addfrr);
         
     }
+    
+    public final void Fillcombo() throws SQLException{
+        String sql3="SELECT fullname FROM licenta.login";
+        ps7=connection.prepareStatement(sql3);
+        rs5=ps7.executeQuery();
+        while(rs5.next()){
+            String nm=rs5.getString("fullname");
+            addfrr.addItem(nm);
+            addfrr.setSelectedItem(" ");
+        }
+    }
+    
     public final void Seticon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
@@ -96,9 +112,9 @@ public class DisplayFriends  extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         addframe = new javax.swing.JInternalFrame();
-        adfr = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        addfrr = new javax.swing.JComboBox<>();
         menu = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         flname = new javax.swing.JLabel();
@@ -124,13 +140,6 @@ public class DisplayFriends  extends javax.swing.JFrame {
         pane.getComponent(0).setVisible(false);
         addframe.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        adfr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adfrActionPerformed(evt);
-            }
-        });
-        addframe.getContentPane().add(adfr, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 260, 60));
-
         jButton7.setText("ADĂUGARE");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +155,9 @@ public class DisplayFriends  extends javax.swing.JFrame {
             }
         });
         addframe.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+
+        addfrr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        addframe.getContentPane().add(addfrr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 280, 40));
 
         jPanel1.add(addframe, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 410, 270));
 
@@ -348,7 +360,7 @@ public class DisplayFriends  extends javax.swing.JFrame {
     private void bdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdeActionPerformed
         int row=t2.getSelectedRow();
         String n_friend=t2.getModel().getValueAt(row,0).toString();
-        int opt=JOptionPane.showConfirmDialog(null, "Sigur ștergeți ?", "ȘTERGERE", JOptionPane.YES_NO_OPTION);
+        int opt=JOptionPane.showConfirmDialog(null, "Sigur doriți să ștergeți?", "ȘTERGERE", JOptionPane.YES_NO_OPTION);
        if(opt==0){
         try{
             String qur="DELETE FROM `licenta`.`friends` WHERE fullname='"+n_friend+"' AND id_user='"+addid+"'";
@@ -368,12 +380,12 @@ public class DisplayFriends  extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         addframe.dispose();
-        adfr.setText("");
+        addfrr.setSelectedItem(" ");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try{
-            String fl2=adfr.getText();
+            String fl2=addfrr.getSelectedItem().toString();
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
             String sqll="SELECT fullname FROM licenta.login  WHERE id ='"+addid+"'";
             ps5 =connection.prepareStatement(sqll);
@@ -390,7 +402,7 @@ public class DisplayFriends  extends javax.swing.JFrame {
             else if(rs4.next()){
               String sqlt="INSERT INTO `licenta`.`friends` (`fullname`, `id_user`) VALUES (?,'"+addid+"');";
                 ps4 =connection.prepareStatement(sqlt);
-                ps4.setString(1,adfr.getText());
+                ps4.setString(1,addfrr.getSelectedItem().toString());
                 ps4.executeUpdate();
                 JOptionPane.showMessageDialog(null,"Prietenul a fost adăugat  ");
                 addframe.dispose();
@@ -403,10 +415,6 @@ public class DisplayFriends  extends javax.swing.JFrame {
 
             }}catch(SQLException e){JOptionPane.showMessageDialog(null,"Error: Nu puteți adăuga această persoană  ");}
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void adfrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adfrActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adfrActionPerformed
 
     private void bopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bopActionPerformed
        try{
@@ -505,7 +513,7 @@ public class DisplayFriends  extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame addframe;
-    private javax.swing.JTextField adfr;
+    private javax.swing.JComboBox<String> addfrr;
     private javax.swing.JButton bad;
     private javax.swing.JButton bde;
     private javax.swing.JButton bf;
