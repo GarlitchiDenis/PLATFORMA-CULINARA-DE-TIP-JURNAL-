@@ -9,25 +9,32 @@ import FIRSTPAGE.*;
 import static FIRSTPAGE.HOME.nmm;
 import Log.Login;
 import java.awt.Color;
+import java.util.List;
 import java.awt.Container;
+import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import net.proteanit.sql.DbUtils;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
  * @author garli
  */
-public class DisplayFriends  extends javax.swing.JFrame {
+public final class DisplayFriends  extends javax.swing.JFrame {
 
     private int count=0;
     static Connection connection = null;
@@ -44,9 +51,13 @@ public class DisplayFriends  extends javax.swing.JFrame {
     PreparedStatement ps6 = null;
     PreparedStatement ps7 = null;
      public static String ff1=null;
-
     public static String addid=null;
     public static String nm_fr;
+    
+    private final Vector<String> v=new Vector<>();
+    private JTextField tf;
+    private boolean hide_flag=false;
+   public static ArrayList<String> arl = new ArrayList<String>();
    
     /**
      * Creates new form Page1
@@ -58,9 +69,95 @@ public class DisplayFriends  extends javax.swing.JFrame {
         DisplayTable();
         Seticon();
         Fillcombo();
-        AutoCompleteDecorator.decorate(addfrr);
+        autoSugest();
+       
         
     }
+    
+    
+
+        private void setModel(DefaultComboBoxModel mdl, String str){
+            addfrr.setModel(mdl);
+            addfrr.setSelectedIndex(-1);
+            tf.setText(str);
+        }
+        
+        private static DefaultComboBoxModel getSuggestedModel(List<String> list,String text){
+         
+            DefaultComboBoxModel m= new DefaultComboBoxModel();
+            list.stream().filter((s) -> (s.startsWith(text))).forEachOrdered((s) -> {
+                m.addElement(s);
+        });
+        return m;
+        }
+    
+       void autoSugest(){
+          addfrr .setEditable(true);
+          tf= (JTextField) addfrr.getEditor().getEditorComponent();
+          tf.addKeyListener(new KeyListener() {
+              @Override
+              public void keyTyped(KeyEvent e) {
+                  EventQueue.invokeLater(() -> {
+                      String text=tf.getText();  
+                      if (text.length()==0) {
+                          addfrr.hidePopup();
+                          setModel(new DefaultComboBoxModel(v), text);
+                          
+                          
+                          
+                      }else{
+                          DefaultComboBoxModel m= getSuggestedModel(v, text);
+                          if(m.getSize()==0 || hide_flag){
+                              addfrr.hidePopup();
+                              hide_flag=false;
+                          }else{
+                              setModel(m, text);
+                              addfrr.showPopup();
+                          }
+                      }
+                  });
+              }
+
+              @Override
+              public void keyPressed(KeyEvent e) {
+                  String text =tf.getText();
+                  int code=e.getKeyCode();
+                  switch (code) {
+                      case KeyEvent.VK_ENTER:
+                          if(v.contains(text)){
+                              v.addElement(text);
+                              Collections.sort(v);
+                              setModel(getSuggestedModel(v, text), text);
+                          }
+                          hide_flag=true;
+                          break;
+                      case KeyEvent.VK_ESCAPE:
+                          hide_flag=true;
+                          break;
+                      case KeyEvent.VK_RIGHT:
+                          for(int i=0; i<v.size();i++) {
+                              String str=v.elementAt(i);
+                              if(str.startsWith(text)){
+                                  addfrr.setSelectedIndex(-1);
+                                  tf.setText(str);
+                                  return;
+                              }
+                          }
+                          break;
+                      default:
+                          break;
+                  }
+              }
+
+              @Override
+              public void keyReleased(KeyEvent e) {
+              }
+          });
+           
+       }   
+    
+    
+
     
     public final void Fillcombo() throws SQLException{
         String sql3="SELECT fullname FROM licenta.login";
@@ -68,11 +165,19 @@ public class DisplayFriends  extends javax.swing.JFrame {
         rs5=ps7.executeQuery();
         while(rs5.next()){
             String nm=rs5.getString("fullname");
-            addfrr.addItem(nm);
-            addfrr.setSelectedItem(" ");
-        }
+            arl.add(nm);
+            
+        } 
+       HashSet hs=new HashSet();
+            hs.addAll(arl);
+            arl.clear();
+            arl.addAll(hs);
+        arl.forEach((friendss) -> {
+            v.addElement(friendss);
+            });
+        
+        
     }
-    
     public final void Seticon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
     }
@@ -156,8 +261,15 @@ public class DisplayFriends  extends javax.swing.JFrame {
         });
         addframe.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
+        addfrr.hidePopup();
+        addfrr.setEditable(true);
         addfrr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
-        addframe.getContentPane().add(addfrr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 280, 40));
+        addfrr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addfrrActionPerformed(evt);
+            }
+        });
+        addframe.getContentPane().add(addfrr, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 280, 40));
 
         jPanel1.add(addframe, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 410, 270));
 
@@ -256,6 +368,11 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        for (int c = 0; c < t2.getColumnCount(); c++)
+        {
+            Class<?> col_class = t2.getColumnClass(c);
+            t2.setDefaultEditor(col_class, null);        // remove editor
+        }
         t2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(t2);
 
@@ -375,12 +492,16 @@ public class DisplayFriends  extends javax.swing.JFrame {
 
     private void badActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badActionPerformed
        addframe.setVisible(true);
+       t2.enable(false);
+       
         
     }//GEN-LAST:event_badActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         addframe.dispose();
         addfrr.setSelectedItem(" ");
+        t2.enable(true);
+       
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -406,6 +527,7 @@ public class DisplayFriends  extends javax.swing.JFrame {
                 ps4.executeUpdate();
                 JOptionPane.showMessageDialog(null,"Prietenul a fost adăugat  ");
                 addframe.dispose();
+                t2.enable(true);
                 DisplayTable();} 
             else{
                JOptionPane.showMessageDialog(null,"Error:  Nu puteți adăuga această persoană ");
@@ -414,6 +536,7 @@ public class DisplayFriends  extends javax.swing.JFrame {
             
 
             }}catch(SQLException e){JOptionPane.showMessageDialog(null,"Error: Nu puteți adăuga această persoană  ");}
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void bopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bopActionPerformed
@@ -475,6 +598,10 @@ public class DisplayFriends  extends javax.swing.JFrame {
     private void bdeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bdeMouseExited
         bde.setBackground( new Color(255,230,208));
     }//GEN-LAST:event_bdeMouseExited
+
+    private void addfrrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addfrrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addfrrActionPerformed
 
     /**
      * @param args the command line arguments

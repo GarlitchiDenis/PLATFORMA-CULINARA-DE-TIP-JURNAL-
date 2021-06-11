@@ -3,6 +3,7 @@ package Log;
 
 import FIRSTPAGE.HOME;
 import Register.Register;
+import com.sun.glass.events.KeyEvent;
 import password.ForgotPassword;
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -49,6 +50,7 @@ public class Login extends javax.swing.JFrame {
  
     }
     
+ 
     
     public final void Seticon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logoLTD.png")));
@@ -161,6 +163,11 @@ public class Login extends javax.swing.JFrame {
                 blog1ActionPerformed(evt);
             }
         });
+        blog1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                blog1KeyPressed(evt);
+            }
+        });
         jPanel1.add(blog1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 170, 50));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -178,10 +185,20 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(fpas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, -1, 30));
 
         luser.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        luser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                luserKeyPressed(evt);
+            }
+        });
         jPanel1.add(luser, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 300, 30));
         luser.getAccessibleContext().setAccessibleName("username");
 
         lpass.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        lpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lpassKeyPressed(evt);
+            }
+        });
         jPanel1.add(lpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 300, 30));
         lpass.getAccessibleContext().setAccessibleName("password");
 
@@ -201,7 +218,12 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 40, 60));
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\garli\\OneDrive\\Desktop\\Licenta\\log bunaur.jpg")); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -10, 1110, 680));
+        jLabel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel4KeyPressed(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -10, 1100, 670));
 
         pswEncrypt.setText("jLabel3");
         jPanel1.add(pswEncrypt, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, -1, -1));
@@ -230,63 +252,6 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_rememberActionPerformed
 
-    private void blog1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blog1ActionPerformed
-        
-      if(remember.isSelected()){
-           String string=luser.getText();
-            try {
-                BufferedWriter writer= new BufferedWriter(new FileWriter("C:\\Users\\garli\\OneDrive\\Desktop\\TastyDiary\\rememberme.txt"));
-                writer.write(string);
-                writer.close();
-                        
-                        } catch (IOException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           
-        
-    } 
-        
-        try {
-					String sql = "SELECT * FROM licenta.login WHERE binary username =? and binary password =? ";
-					connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
-					pst = connection.prepareStatement(sql);
-					vps = lpass.getText();
-                                        int s=3;
-                                        StringBuffer pp = encrypt(vps, s);                                              
-                                        pswEncrypt.setText(pp.toString());            
-                                        pst.setString(1, luser.getText());
-					pst.setString(2, pswEncrypt.getText());
-					rs = pst.executeQuery();
-					if (rs.next()) {			
-							String fullname = rs.getString("fullname");
-                                                        dispose();
-                                                        HOME.nmm=fullname;
-							HOME p=new HOME();
-                                                        p.setVisible(true);
-						
-						 
-
-					} else {
-                                            JOptionPane.showMessageDialog(null, "Nume de utilizator sau parola incorecte ");
-						
-                                               
-					}
-				} catch (HeadlessException | SQLException p) {
-					JOptionPane.showMessageDialog(null, p);
-				}
-        
-        
-        
-    }//GEN-LAST:event_blog1ActionPerformed
-
-    private void blog1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blog1MouseEntered
-        blog1.setBackground(Color.GRAY);
-    }//GEN-LAST:event_blog1MouseEntered
-
-    private void blog1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blog1MouseExited
-       blog1.setBackground( new Color(255,230,208));
-    }//GEN-LAST:event_blog1MouseExited
-
     private void bregMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bregMouseEntered
        breg.setBackground(Color.GRAY);
     }//GEN-LAST:event_bregMouseEntered
@@ -294,6 +259,151 @@ public class Login extends javax.swing.JFrame {
     private void bregMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bregMouseExited
         breg.setBackground( new Color(255,230,208));
     }//GEN-LAST:event_bregMouseExited
+
+    private void blog1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_blog1KeyPressed
+
+    }//GEN-LAST:event_blog1KeyPressed
+
+    private void blog1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blog1ActionPerformed
+
+        if(remember.isSelected()){
+            String string=luser.getText();
+            try {
+                BufferedWriter writer= new BufferedWriter(new FileWriter("C:\\Users\\garli\\OneDrive\\Desktop\\TastyDiary\\rememberme.txt"));
+                writer.write(string);
+                writer.close();
+
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        try {
+            String sql = "SELECT * FROM licenta.login WHERE binary username =? and binary password =? ";
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+            pst = connection.prepareStatement(sql);
+            vps = lpass.getText();
+            int s=3;
+            StringBuffer pp = encrypt(vps, s);
+            pswEncrypt.setText(pp.toString());
+            pst.setString(1, luser.getText());
+            pst.setString(2, pswEncrypt.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String fullname = rs.getString("fullname");
+                dispose();
+                HOME.nmm=fullname;
+                HOME p=new HOME();
+                p.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Nume de utilizator sau parola incorecte ");
+
+            }
+        } catch (HeadlessException | SQLException p) {
+            JOptionPane.showMessageDialog(null, p);
+        }
+
+    }//GEN-LAST:event_blog1ActionPerformed
+
+    private void blog1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blog1MouseExited
+        blog1.setBackground( new Color(255,230,208));
+    }//GEN-LAST:event_blog1MouseExited
+
+    private void blog1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blog1MouseEntered
+        blog1.setBackground(Color.GRAY);
+    }//GEN-LAST:event_blog1MouseEntered
+
+    private void jLabel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4KeyPressed
+
+    private void luserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_luserKeyPressed
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+          if(remember.isSelected()){
+            String string=luser.getText();
+            try {
+                BufferedWriter writer= new BufferedWriter(new FileWriter("C:\\Users\\garli\\OneDrive\\Desktop\\TastyDiary\\rememberme.txt"));
+                writer.write(string);
+                writer.close();
+
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        try {
+            String sql = "SELECT * FROM licenta.login WHERE binary username =? and binary password =? ";
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+            pst = connection.prepareStatement(sql);
+            vps = lpass.getText();
+            int s=3;
+            StringBuffer pp = encrypt(vps, s);
+            pswEncrypt.setText(pp.toString());
+            pst.setString(1, luser.getText());
+            pst.setString(2, pswEncrypt.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String fullname = rs.getString("fullname");
+                dispose();
+                HOME.nmm=fullname;
+                HOME p=new HOME();
+                p.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Nume de utilizator sau parola incorecte ");
+
+            }
+        } catch (HeadlessException | SQLException p) {
+            JOptionPane.showMessageDialog(null, p);
+        } 
+            }
+    }//GEN-LAST:event_luserKeyPressed
+
+    private void lpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lpassKeyPressed
+       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+          if(remember.isSelected()){
+            String string=luser.getText();
+            try {
+                BufferedWriter writer= new BufferedWriter(new FileWriter("C:\\Users\\garli\\OneDrive\\Desktop\\TastyDiary\\rememberme.txt"));
+                writer.write(string);
+                writer.close();
+
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        try {
+            String sql = "SELECT * FROM licenta.login WHERE binary username =? and binary password =? ";
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/licenta", "root","000000");
+            pst = connection.prepareStatement(sql);
+            vps = lpass.getText();
+            int s=3;
+            StringBuffer pp = encrypt(vps, s);
+            pswEncrypt.setText(pp.toString());
+            pst.setString(1, luser.getText());
+            pst.setString(2, pswEncrypt.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String fullname = rs.getString("fullname");
+                dispose();
+                HOME.nmm=fullname;
+                HOME p=new HOME();
+                p.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Nume de utilizator sau parola incorecte ");
+
+            }
+        } catch (HeadlessException | SQLException p) {
+            JOptionPane.showMessageDialog(null, p);
+        } 
+            }
+    }//GEN-LAST:event_lpassKeyPressed
 
     /**
      * @param args the command line arguments

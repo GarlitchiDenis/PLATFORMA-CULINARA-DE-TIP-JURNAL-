@@ -146,6 +146,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
         leg = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         rfname = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TastyDiary");
@@ -246,9 +247,14 @@ public class FriendRecipes  extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        for (int c = 0; c < t3.getColumnCount(); c++)
+        {
+            Class<?> col_class = t3.getColumnClass(c);
+            t3.setDefaultEditor(col_class, null);        // remove editor
+        }
         t3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(t3);
-        t3.getAccessibleContext().setAccessibleName("r");
+        t3.getAccessibleContext().setAccessibleName("");
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 540, 290));
 
@@ -332,7 +338,10 @@ public class FriendRecipes  extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(228, 236, 193));
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 810, 40));
-        jPanel1.add(rfname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 160, 60));
+        jPanel1.add(rfname, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 130, 60));
+
+        jLabel1.setText("PRIETENUL:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 90, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
@@ -607,6 +616,7 @@ public class FriendRecipes  extends javax.swing.JFrame {
     private javax.swing.JCheckBox cer;
     private javax.swing.JLabel flname;
     private javax.swing.JCheckBox fruc;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

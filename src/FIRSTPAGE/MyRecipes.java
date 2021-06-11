@@ -264,11 +264,18 @@ public class MyRecipes  extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
+
         ));
+        for (int c = 0; c < t1.getColumnCount(); c++)
+        {
+            Class<?> col_class = t1.getColumnClass(c);
+            t1.setDefaultEditor(col_class, null);        // remove editor
+        }
+        t1.setFocusable(false);
         t1.setSelectionForeground(new java.awt.Color(235, 236, 193));
         t1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(t1);
-        t1.getAccessibleContext().setAccessibleName("r");
+        t1.getAccessibleContext().setAccessibleName("");
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 550, 280));
 
@@ -389,7 +396,7 @@ public class MyRecipes  extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(228, 236, 193));
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 810, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 430));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
         pack();
         setLocationRelativeTo(null);

@@ -432,7 +432,7 @@ public class EditRec  extends javax.swing.JFrame {
     }//GEN-LAST:event_bmrActionPerformed
 
     private void bsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsvActionPerformed
-   int opt=JOptionPane.showConfirmDialog(null, "Are you sure to Edit", "Edit", JOptionPane.YES_NO_OPTION);
+   int opt=JOptionPane.showConfirmDialog(null, "Sigur dorești să modifici rețeta?", "MODIFICARE", JOptionPane.YES_NO_OPTION);
      if(opt==0){  
                     try {
                                          int l;
